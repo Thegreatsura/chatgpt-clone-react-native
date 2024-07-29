@@ -1,55 +1,36 @@
-# React Native ChatGPT Clone with Clerk & RevenueCat
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-This is a React Native ChatGPT clone using [Clerk](https://go.clerk.com/wvMHe8T) for user authentication and [RevenueCat](https://www.revenuecat.com/docs/getting-started/installation/reactnative?utm_medium=sponsored&utm_source=youtube&utm_campaign=SimonGrimm) for In-App purchases.
+## Getting Started
 
-Additional features:
+First, run the development server:
 
-- [Expo Router](https://docs.expo.dev/routing/introduction/) file-based navigation and API Routes
-- [OpenAI API](https://platform.openai.com/) for GPT chat completions and image generation
-- [Reanimated](https://docs.swmansion.com/react-native-reanimated/) 3 for animations
-- [Gesture Handler](https://docs.swmansion.com/react-native-gesture-handler/) for gestures
-- [Redash](https://github.com/wcandillon/react-native-redash) for animated text
-- [Zeego](https://zeego.dev/start) for native menus
-- [RN MMKV](https://github.com/mrousavy/react-native-mmkv) for efficient key/value storage
-- [Expo SQLite](https://docs.expo.dev/versions/latest/sdk/sqlite-next/) for storing chats and messages
-- [Bottom Sheet](https://ui.gorhom.dev/components/bottom-sheet/) for bottom sheet component
-- [FlashList](https://shopify.github.io/flash-list/) for efficient list rendering
-- [React Native OpenAI](https://github.com/candlefinance/react-native-openai) for streaming
-- [Image Zoom](https://github.com/likashefqet/react-native-image-zoom) for image zoom component
-- [Shimmer Placeholder](https://github.com/tomzaku/react-native-shimmer-placeholder) for loading placeholders
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-## Screenshots
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-<div style="display: flex; flex-direction: 'row';">
-<img src="./screenshots/1.png" width=30%>
-<img src="./screenshots/2.png" width=30%>
-<img src="./screenshots/3.png" width=30%>
-<img src="./screenshots/4.png" width=30%>
-<img src="./screenshots/5.png" width=30%>
-<img src="./screenshots/6.png" width=30%>
-<img src="./screenshots/7.png" width=30%>
-<img src="./screenshots/8.png" width=30%>
-<img src="./screenshots/9.png" width=30%>
-<img src="./screenshots/10.png" width=30%>
-<img src="./screenshots/11.png" width=30%>
-<img src="./screenshots/12.png" width=30%>
-<img src="./screenshots/13.png" width=30%>
-<img src="./screenshots/14.png" width=30%>
-</div>
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## Demo
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-<div style="display: flex; flex-direction: 'row';">
-<img src="./screenshots/intro.gif" width=30%>
-<img src="./screenshots/chat.gif" width=30%>
-<img src="./screenshots/context.gif" width=30%>
-<img src="./screenshots/sqlite.gif" width=30%>
-<img src="./screenshots/purchase.gif" width=30%>
-<img src="./screenshots/explore.gif" width=30%>
+## Learn More
 
-<img src="./screenshots/dalle.gif" width=30%>
-<img src="./screenshots/imagecontext.gif" width=30%>
-<img src="./screenshots/imagezoom.gif" width=30%>
+To learn more about Next.js, take a look at the following resources:
 
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-</div>
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
