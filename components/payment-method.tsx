@@ -14,11 +14,12 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { useState } from "react";
-import { ArrowLeft, ChevronDown, ChevronUp } from "lucide-react";
+import { ArrowLeft, ChevronDown, ChevronUp, Copy } from "lucide-react";
+import { Awashbank, Crypto, Telebirr } from "./payment/icons";
 
 export function DemoPaymentMethod() {
   const [detail, setDetail] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState("card");
+  const [paymentMethod, setPaymentMethod] = useState("Telebirr");
 
   return (
     <Card>
@@ -60,7 +61,7 @@ export function DemoPaymentMethod() {
           )}
         </span>
       </div>
-      <CardHeader>
+      <CardHeader className="mt-4">
         <div className="flex lg:hidden flex-col items-center justify-center">
           <div className="flex flex-col items-center">
             <div className="text-center">
@@ -71,7 +72,9 @@ export function DemoPaymentMethod() {
               />
               <p className="text-lg font-bold mb-1">Stubborn Attachments</p>
             </div>
-            <span className="text-3xl p-2">Br 160.76</span>
+            <span className="text-3xl p-2">
+              {paymentMethod === "Crypto" ? "USDT" : "Br"} 160.76
+            </span>
           </div>
         </div>
         <CardTitle>Pay with {paymentMethod} </CardTitle>
@@ -84,65 +87,84 @@ export function DemoPaymentMethod() {
           onValueChange={(val) => {
             setPaymentMethod(val);
           }}
-          defaultValue="card"
+          defaultValue="Telebirr"
           className="grid grid-cols-3 gap-4"
         >
           <div>
-            <RadioGroupItem value="card" id="card" className="peer sr-only" />
+            <RadioGroupItem
+              value="Telebirr"
+              id="Telebirr"
+              className="peer sr-only"
+            />
             <Label
-              htmlFor="card"
+              htmlFor="Telebirr"
               className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                className="mb-3 h-6 w-6"
-              >
-                <rect width="20" height="14" x="2" y="5" rx="2" />
-                <path d="M2 10h20" />
-              </svg>
-              Card
+              <Telebirr className="mb-3 h-6 w-6" />
+              Telebirr
             </Label>
           </div>
           <div>
             <RadioGroupItem
-              value="paypal"
-              id="paypal"
+              value="Awashbank"
+              id="Awashbank"
               className="peer sr-only"
             />
             <Label
-              htmlFor="paypal"
+              htmlFor="Awashbank"
               className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
             >
-              <Icons.paypal className="mb-3 h-6 w-6" />
-              Paypal
+              <Awashbank className="mb-3 h-6 w-6" />
+              Awash
             </Label>
           </div>
           <div>
-            <RadioGroupItem value="apple" id="apple" className="peer sr-only" />
+            <RadioGroupItem
+              value="Crypto"
+              id="Crypto"
+              className="peer sr-only"
+            />
             <Label
-              htmlFor="apple"
+              htmlFor="Crypto"
               className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
             >
-              <Icons.apple className="mb-3 h-6 w-6" />
-              Apple
+              <Crypto className="mb-3 h-6 w-6" />
+              Crypto
             </Label>
           </div>
         </RadioGroup>
-        <div className="grid gap-2 relative">
-          <Label htmlFor="email">Email</Label>
-          <Input id="email" placeholder="example@gmail.com" />
-          {/* <div className="absolute inser-0">hello</div> */}
-        </div>
-        <div className="grid gap-2">
-          <Label htmlFor="tnx">Transaction number</Label>
-          <Input id="tnx" placeholder="" />
-        </div>
+        {paymentMethod !== "Crypto" ? (
+          <div className="grid gap-6">
+            <div className="grid gap-2 relative">
+              <Label htmlFor="email">Email</Label>
+              <Input id="email" placeholder="example@gmail.com" />
+              {/* <div className="absolute inser-0">hello</div> */}
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="tnx">Transaction number</Label>
+              <Input id="tnx" placeholder="" />
+            </div>
+          </div>
+        ) : (
+          <div className="grid gap-6">
+            <div className="grid gap-2 relative">
+              <Label htmlFor="address">address</Label>
+              <Input
+                readOnly
+                id="address"
+                value={"1FfmbHfnpaZjKFvyi1okTjJJusN455paPH"}
+              />
+              <Copy className="absolute inser-0" />
+            </div>
+            <div className="grid gap-2">
+              <img
+                src="https://github.com/shadcn.png"
+                alt="Product"
+                className="mx-auto mb-4 h-40 w-40 rounded-lg"
+              />
+            </div>
+          </div>
+        )}
       </CardContent>
       <CardFooter>
         <Button className="w-full">Pay</Button>
