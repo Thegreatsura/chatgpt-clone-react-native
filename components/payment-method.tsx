@@ -14,12 +14,19 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { useState } from "react";
-import { ArrowLeft, ChevronDown, ChevronUp, Copy } from "lucide-react";
+import {
+  ArrowLeft,
+  ChevronDown,
+  ChevronUp,
+  Copy,
+  EllipsisVertical,
+} from "lucide-react";
 import { Awashbank, Crypto, Telebirr } from "./payment/icons";
+import { Skeleton } from "./ui/skeleton";
 
 export function DemoPaymentMethod() {
   const [detail, setDetail] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState("Telebirr");
+  const [paymentMethod, setPaymentMethod] = useState("Crypto");
 
   return (
     <Card>
@@ -73,7 +80,10 @@ export function DemoPaymentMethod() {
               <p className="text-lg font-bold mb-1">Stubborn Attachments</p>
             </div>
             <span className="text-3xl p-2">
-              {paymentMethod === "Crypto" ? "USDT" : "Br"} 160.76
+              <span className="text-sm font-bold">
+                {paymentMethod === "Crypto" ? "USDT" : "Br"}
+              </span>
+              160.76
             </span>
           </div>
         </div>
@@ -87,7 +97,8 @@ export function DemoPaymentMethod() {
           onValueChange={(val) => {
             setPaymentMethod(val);
           }}
-          defaultValue="Telebirr"
+          // defaultValue="Telebirr"
+          defaultValue={paymentMethod}
           className="grid grid-cols-3 gap-4"
         >
           <div>
@@ -134,36 +145,9 @@ export function DemoPaymentMethod() {
           </div>
         </RadioGroup>
         {paymentMethod !== "Crypto" ? (
-          <div className="grid gap-6">
-            <div className="grid gap-2 relative">
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" placeholder="example@gmail.com" />
-              {/* <div className="absolute inser-0">hello</div> */}
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="tnx">Transaction number</Label>
-              <Input id="tnx" placeholder="" />
-            </div>
-          </div>
+          <LocalBankCheckout />
         ) : (
-          <div className="grid gap-6">
-            <div className="grid gap-2 relative">
-              <Label htmlFor="address">address</Label>
-              <Input
-                readOnly
-                id="address"
-                value={"1FfmbHfnpaZjKFvyi1okTjJJusN455paPH"}
-              />
-              <Copy className="absolute inser-0" />
-            </div>
-            <div className="grid gap-2">
-              <img
-                src="https://github.com/shadcn.png"
-                alt="Product"
-                className="mx-auto mb-4 h-40 w-40 rounded-lg"
-              />
-            </div>
-          </div>
+          <CryptoCheckout />
         )}
       </CardContent>
       <CardFooter>
@@ -172,3 +156,69 @@ export function DemoPaymentMethod() {
     </Card>
   );
 }
+
+const LocalBankCheckout = () => {
+  return (
+    <div className="grid gap-6">
+      <div className="grid gap-2 relative">
+        <Label htmlFor="email">Email</Label>
+        <Input id="email" placeholder="example@gmail.com" />
+        {/* <div className="absolute inser-0">hello</div> */}
+      </div>
+      <div className="grid gap-2">
+        <Label htmlFor="tnx">Transaction number</Label>
+        <Input id="tnx" placeholder="" />
+      </div>
+    </div>
+  );
+};
+
+const CryptoCheckout = () => {
+  const [showQr, setShowQr] = useState(false);
+
+  return (
+    <div className="grid gap-3">
+      <div className="grid gap-2 relative">
+        <Label>Address</Label>
+        <div className="flex text-center items-center justify-center">
+          <div
+            onClick={() => {
+              console.log("copied");
+            }}
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            1FfmbHfnpaZjKFvyi1okTjJJusN455paPH
+          </div>
+        </div>
+      </div>
+      {showQr ? (
+        <div className="grid gap-2">
+          <Avatar className="mx-auto mb-4 h-40 w-40 rounded-lg">
+            <AvatarImage
+              className="mx-auto h-40 w-40 rounded-lg"
+              src="/image.png"
+              alt="@shadcn"
+            />
+            <AvatarFallback className="mx-auto mb-4 h-40 w-40 rounded-lg">
+              <Skeleton className="mx-auto mb-4 h-40 w-40 rounded-lg" />
+            </AvatarFallback>
+          </Avatar>
+          {/* <img
+            src="/image.png"
+            alt="Product"
+            className="mx-auto mb-4 h-40 w-40 rounded-lg"
+          /> */}
+        </div>
+      ) : (
+        <Button
+          onClick={() => {
+            setShowQr(true);
+          }}
+          variant={"ghost"}
+        >
+          Show Qr code
+        </Button>
+      )}
+    </div>
+  );
+};

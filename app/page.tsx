@@ -88,6 +88,7 @@ export default function Home() {
             .
           </p>
         </div>
+        <div className="size-6 md:hidden"></div>
       </div>
     </div>
   );
