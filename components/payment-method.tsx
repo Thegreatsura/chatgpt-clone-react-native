@@ -23,6 +23,19 @@ export function DemoPaymentMethod() {
   return (
     <Card>
       <CardHeader>
+        <div className="flex flex-col items-center justify-center mt-10">
+          <div className="flex flex-col items-center">
+            <div className="text-center">
+              <img
+                src="https://github.com/shadcn.png"
+                alt="Product"
+                className="mx-auto mb-4 h-40 w-40 rounded-lg"
+              />
+              <p className="text-lg font-bold mb-2">Stubborn Attachments</p>
+            </div>
+            <span className="text-3xl p-3">Br 160.76</span>
+          </div>
+        </div>
         <CardTitle>Pay with</CardTitle>
         <CardDescription>
           Add a new payment method to your account.

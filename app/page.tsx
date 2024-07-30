@@ -1,4 +1,5 @@
 import { DemoPaymentMethod } from "@/components/payment-method";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { UserAuthForm } from "@/components/user-auth-form";
@@ -12,15 +13,25 @@ export default function Home() {
     <div className="container relative h-full flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
       {/* Left side */}
 
-      <div className="relative h-full flex-col p-10 text-white dark:border-r lg:flex">
+      <div className="relative hidden h-full flex-col p-10 text-white dark:border-r md:flex">
         <div className="absolute rounded-xl m-2 inset-0 bg-zinc-900" />
         <div className="relative z-20 flex flex-col  text-lg font-medium">
           <div className="group w-40 flex items-center">
             <div className="bg-zinc-900 h-10 w-10 mr-[2px] text-primary-foreground inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-              <ArrowLeft className="size-6 text-gray-500 group-hover:text-white " />
+              <ArrowLeft className="size-6 p-0 text-gray-500 group-hover:text-white " />
             </div>
             <p className="flex items-center group-hover:hidden transition-all">
-              <Store className="size-4 mr-[2px] rounded-lg" />
+              <div className="bg-gray-200 p-[3px] rounded-full mr-[2px]">
+                <Avatar className="size-4">
+                  <AvatarImage
+                    src="https://github.com/shadcn.png"
+                    alt="@shadcn"
+                    className="h-6 w-6"
+                  />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+              </div>
+              {/* <Store className="size-4 mr-[2px] rounded-lg" /> */}
               surapay
             </p>
             <p className="hidden group-hover:block transition-all">back</p>
@@ -28,8 +39,15 @@ export default function Home() {
 
           <div className="flex flex-col items-center justify-center mt-10">
             <div className="flex flex-col items-center">
-              <p>Total amount</p>
-              <span className="text-5xl p-3">$160.76</span>
+              <div className="text-center">
+                <img
+                  src="https://github.com/shadcn.png"
+                  alt="Product"
+                  className="mx-auto mb-4 h-40 w-40 rounded-lg"
+                />
+                <p className="text-lg font-bold mb-2">Stubborn Attachments</p>
+              </div>
+              <span className="text-3xl p-3">Br 160.76</span>
             </div>
           </div>
 
@@ -38,7 +56,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="relative z-20 px-20 mt-10">
+        <div className="relative z-20 px-10 mt-10">
           <p>Payment summary</p>
         </div>
 
