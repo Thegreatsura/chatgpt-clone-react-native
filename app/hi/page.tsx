@@ -13,7 +13,7 @@ import { Payment10 } from "@/components/payment/payment-10";
 import { PaymentDetail } from "@/components/payment/payment-detal";
 
 const Page = () => {
-  return <Payment8 />;
+  return <Payment3 />;
 };
 
 export default Page;

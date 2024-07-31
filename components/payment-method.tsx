@@ -1,5 +1,6 @@
 "use client";
 import { Icons } from "@/components/icons";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -13,12 +14,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
   ChevronDown,
   ChevronUp,
   Copy,
+  Dot,
   EllipsisVertical,
 } from "lucide-react";
 import { Awashbank, Crypto, Telebirr } from "./payment/icons";
@@ -34,6 +36,10 @@ import {
   SheetTrigger,
 } from "./ui/sheet";
 import { FadeText } from "./magicui/fade-text";
+import { Modal, ModalTrigger } from "./ui/animated-modal";
+import { cn } from "@/lib/utils";
+import { hihi } from "@/action";
+import Link from "next/link";
 
 const Info = ({
   paymentMethod,
@@ -43,12 +49,12 @@ const Info = ({
   paymentMethod: string;
 }) => {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex z-100 flex-col items-center">
       <div className="text-center">
         <img
           src="https://github.com/shadcn.png"
           alt="Product"
-          className="mx-auto mb-4 h-40 w-40 rounded-lg"
+          className="mx-auto mb-4 size-32 rounded-lg"
         />
         <p className="text-lg font-bold mb-1">Stubborn Attachments</p>
       </div>
@@ -64,11 +70,13 @@ const Info = ({
 
 export function DemoPaymentMethod() {
   const [detail, setDetail] = useState(false);
+  const [payed, setPayed] = useState(false);
+  const [pending, setPending] = useState<boolean>(false);
   const [paymentMethod, setPaymentMethod] = useState("Crypto");
 
   return (
-    <Card className="relative">
-      <div className="flex relative md:hidden w-full mt-2 items-center justify-between space-x-2">
+    <Card className="relative flex flex-col h-full my-2">
+      <div className="flex relative lg:hidden w-full items-center justify-between space-x-2">
         <div className="flex w-40 text-center items-center space-x-2">
           <div
             onClick={() => {
@@ -108,14 +116,16 @@ export function DemoPaymentMethod() {
       </div>
 
       {detail ? (
-        <FadeText
-          className="absolute z-100 mt-2 w-full left-1/2 transform -translate-x-1/2 bg-white dark:bg- text-4xl font-bold text-black dark:text-white"
-          direction="down"
-          framerProps={{
-            show: { transition: { delay: 0.6 } },
-          }}
-          text={<Info paymentMethod={paymentMethod} price="59" />}
-        />
+        <div className="h-full w-full">
+          <FadeText
+            className="absolute z-100 mt-2 w-full left-1/2 transform -translate-x-1/2 bg-white dark:bg- text-4xl font-bold text-black dark:text-white"
+            direction="down"
+            framerProps={{
+              show: { transition: { delay: 0.6 } },
+            }}
+            text={<Info paymentMethod={paymentMethod} price="59" />}
+          />
+        </div>
       ) : null}
 
       <CardHeader className="">
@@ -194,6 +204,15 @@ export function DemoPaymentMethod() {
             </Label>
           </div>
         </RadioGroup>
+        <Button
+          className="lg:hidden"
+          onClick={() => {
+            setDetail((prev) => !prev);
+          }}
+          variant={"ghost"}
+        >
+          {detail ? "Close" : "View Details"}{" "}
+        </Button>
         {paymentMethod !== "Crypto" ? (
           <LocalBankCheckout />
         ) : (
@@ -201,8 +220,59 @@ export function DemoPaymentMethod() {
         )}
       </CardContent>
       <CardFooter>
-        <Button className="w-full">Pay</Button>
+        <Button
+          disabled={pending || payed}
+          onClick={() => {
+            setPending(true);
+            setTimeout(() => {
+              setPending(false);
+              setPayed((prev) => !prev);
+            }, 1000 * 5);
+          }}
+          className="flex flex-col items-center justify-center w-full group"
+        >
+          <p
+            className={cn("translate-y-3 w-full transition duration-500", {
+              "translate-x-40 translate-y-0 opacity-0 transition duration-500":
+                payed,
+            })}
+          >
+            {pending ? (
+              <div className="flex items-center justify-center top-1/2 transform -translate-y-1/2 relative">
+                <p>processing..</p>
+                <div className="animate-spin absolute right-0 rounded-full h-5 w-5 border-b-2 border-primary-foreground" />
+              </div>
+            ) : (
+              "Pay"
+            )}
+          </p>
+          <p
+            className={cn("-translate-x-40 opacity-0 transition duration-500", {
+              "-translate-y-3 translate-x-0 opacity-100 duration-500": payed,
+            })}
+          >
+            Done
+          </p>
+        </Button>
       </CardFooter>
+      <div className="flex-1" />
+      <p className="px-8 text-center text-sm text-muted-foreground">
+        By clicking pay, you agree to our{" "}
+        <Link
+          href="/terms"
+          className="underline underline-offset-4 hover:text-primary"
+        >
+          Terms of Service
+        </Link>{" "}
+        and{" "}
+        <Link
+          href="/privacy"
+          className="underline underline-offset-4 hover:text-primary"
+        >
+          Privacy Policy
+        </Link>
+        .
+      </p>
     </Card>
   );
 }
@@ -213,7 +283,6 @@ const LocalBankCheckout = () => {
       <div className="grid gap-2 relative">
         <Label htmlFor="email">Email</Label>
         <Input id="email" placeholder="example@gmail.com" />
-        {/* <div className="absolute inser-0">hello</div> */}
       </div>
       <div className="grid gap-2">
         <Label htmlFor="tnx">Transaction number</Label>
@@ -231,33 +300,41 @@ const CryptoCheckout = () => {
       <div className="grid gap-2 relative">
         <Label>Address</Label>
         <div className="flex text-center items-center justify-center">
-          {/* <div
+          <Button
             onClick={() => {
-              console.log("copied");
+              toast("Address copied", {
+                description: "past it in your choice crypto wallet to send",
+                // action: {
+                //   label: "Undo",
+                //   onClick: () => console.log("Undo"),
+                // },
+              });
             }}
-            className="flex z-50 h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            variant={"ghost"}
+            className="flex z-50 w-[248px] md:w-full h-10 rounded-md px-3 py-2"
           >
-            1FfmbHfnpaZjKFvyi1okTjJJusN455pa
-          </div> */}
+            <p className="truncate">1FfmbHfnpaZjKFvyi1okTjJJusN455paPH</p>
+          </Button>
         </div>
       </div>
-      {showQr ? (
-        <div className="grid gap-2">
-          <Avatar className="mx-auto mb-4 h-40 w-40 rounded-lg">
-            <AvatarImage
-              className="mx-auto h-40 w-40 rounded-lg"
-              src="/image.png"
-              alt="@shadcn"
-            />
-            <AvatarFallback className="mx-auto mb-4 h-40 w-40 rounded-lg">
-              <Skeleton className="mx-auto mb-4 h-40 w-40 rounded-lg" />
+      {true ? (
+        <div className="flex items-center justify-normal bg-muted p-2">
+          <Avatar className="h-20 w-20 rounded-none">
+            <AvatarImage className="h-20 w-20" src="/image.png" alt="@shadcn" />
+            <AvatarFallback className="mb-4 h-20 w-20">
+              <Skeleton className="mb-4 h-20 w-20" />
             </AvatarFallback>
           </Avatar>
-          {/* <img
-            src="/image.png"
-            alt="Product"
-            className="mx-auto mb-4 h-40 w-40 rounded-lg"
-          /> */}
+          <div className="p-1 space-y-1">
+            <div className="flex items-center space-x-1">
+              <Dot className="size-8" />
+              <p className="text-xs">click on addrs to copy the address</p>
+            </div>
+            <div className="flex items-center space-x-1">
+              <Dot className="size-7" />
+              <p className="text-xs">click on Qr code to enlarge</p>
+            </div>
+          </div>
         </div>
       ) : (
         <Button

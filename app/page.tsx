@@ -67,10 +67,13 @@ export default function Home() {
 
       {/* Right side  */}
 
-      <div className="lg:p-8">
+      <div className="flex h-full lg:p-8">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <DemoPaymentMethod />
-          <p className="px-8 text-center text-sm text-muted-foreground">
+          {/* <div className="flex-1" /> */}
+          {/* <div className="h-24 bg-red-500 md:hidden" /> */}
+
+          {/* <p className="px-8 text-center text-sm text-muted-foreground">
             By clicking pay, you agree to our{" "}
             <Link
               href="/terms"
@@ -86,9 +89,8 @@ export default function Home() {
               Privacy Policy
             </Link>
             .
-          </p>
+          </p> */}
         </div>
-        <div className="size-6 md:hidden"></div>
       </div>
     </div>
   );
