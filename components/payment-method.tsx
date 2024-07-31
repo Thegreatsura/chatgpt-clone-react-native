@@ -23,14 +23,52 @@ import {
 } from "lucide-react";
 import { Awashbank, Crypto, Telebirr } from "./payment/icons";
 import { Skeleton } from "./ui/skeleton";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "./ui/sheet";
+import { FadeText } from "./magicui/fade-text";
+
+const Info = ({
+  paymentMethod,
+  price,
+}: {
+  price: string;
+  paymentMethod: string;
+}) => {
+  return (
+    <div className="flex flex-col items-center">
+      <div className="text-center">
+        <img
+          src="https://github.com/shadcn.png"
+          alt="Product"
+          className="mx-auto mb-4 h-40 w-40 rounded-lg"
+        />
+        <p className="text-lg font-bold mb-1">Stubborn Attachments</p>
+      </div>
+      <span className="text-3xl p-2">
+        {price}
+        <span className="text-sm font-bold">
+          {paymentMethod === "Crypto" ? "USDT" : "Br"}
+        </span>
+      </span>
+    </div>
+  );
+};
 
 export function DemoPaymentMethod() {
   const [detail, setDetail] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState("Crypto");
 
   return (
-    <Card>
-      <div className="flex lg:hidden w-full mt-2 items-center justify-between space-x-2">
+    <Card className="relative">
+      <div className="flex relative md:hidden w-full mt-2 items-center justify-between space-x-2">
         <div className="flex w-40 text-center items-center space-x-2">
           <div
             onClick={() => {
@@ -68,8 +106,20 @@ export function DemoPaymentMethod() {
           )}
         </span>
       </div>
-      <CardHeader className="mt-4">
-        <div className="flex lg:hidden flex-col items-center justify-center">
+
+      {detail ? (
+        <FadeText
+          className="absolute z-100 mt-2 w-full left-1/2 transform -translate-x-1/2 bg-white dark:bg- text-4xl font-bold text-black dark:text-white"
+          direction="down"
+          framerProps={{
+            show: { transition: { delay: 0.6 } },
+          }}
+          text={<Info paymentMethod={paymentMethod} price="59" />}
+        />
+      ) : null}
+
+      <CardHeader className="">
+        <div className="hidden md:flex lg:hidden flex-col items-center justify-center">
           <div className="flex flex-col items-center">
             <div className="text-center">
               <img
@@ -181,14 +231,14 @@ const CryptoCheckout = () => {
       <div className="grid gap-2 relative">
         <Label>Address</Label>
         <div className="flex text-center items-center justify-center">
-          <div
+          {/* <div
             onClick={() => {
               console.log("copied");
             }}
-            className="flex h-10 w-full truncate rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex z-50 h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
           >
             1FfmbHfnpaZjKFvyi1okTjJJusN455pa
-          </div>
+          </div> */}
         </div>
       </div>
       {showQr ? (
