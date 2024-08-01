@@ -2,6 +2,7 @@ import { DemoPaymentMethod } from "@/components/payment-method";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
 import { UserAuthForm } from "@/components/user-auth-form";
 import { cn } from "@/lib/utils";
 import { ArrowLeft, Store } from "lucide-react";
@@ -28,7 +29,9 @@ export default function Home() {
                     alt="@shadcn"
                     className="h-6 w-6"
                   />
-                  <AvatarFallback>CN</AvatarFallback>
+                  <AvatarFallback>
+                    <Skeleton className="h-6 w-6 !bg-zinc-500" />
+                  </AvatarFallback>
                 </Avatar>
               </div>
               {/* <Store className="size-4 mr-[2px] rounded-lg" /> */}
@@ -68,28 +71,8 @@ export default function Home() {
       {/* Right side  */}
 
       <div className="flex h-full lg:p-8">
-        <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+        <div className="mx-auto w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <DemoPaymentMethod />
-          {/* <div className="flex-1" /> */}
-          {/* <div className="h-24 bg-red-500 md:hidden" /> */}
-
-          {/* <p className="px-8 text-center text-sm text-muted-foreground">
-            By clicking pay, you agree to our{" "}
-            <Link
-              href="/terms"
-              className="underline underline-offset-4 hover:text-primary"
-            >
-              Terms of Service
-            </Link>{" "}
-            and{" "}
-            <Link
-              href="/privacy"
-              className="underline underline-offset-4 hover:text-primary"
-            >
-              Privacy Policy
-            </Link>
-            .
-          </p> */}
         </div>
       </div>
     </div>

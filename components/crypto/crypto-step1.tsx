@@ -14,6 +14,7 @@ import {
 } from "../ui/card";
 import { cn } from "@/lib/utils";
 import { CryptoNetworks } from "./crypto-network";
+import { TriangleAlert } from "lucide-react";
 
 const formVariants = {
   hidden: {
@@ -42,8 +43,15 @@ export const CryptoStep1 = () => {
       animate="visible"
       exit="exit"
     >
-      <CardContent className="flex h-[228px] bg-muted rounded-xl p-3 justify-center">
+      <CardContent className="flex flex-col gap-4 h-[228px] bg-muted rounded-xl p-3">
         <CryptoNetworks />
+        <CardDescription className="text-center p-2 bg-red-300/40 rounded-lg">
+          <div className="flex m-2">
+            <TriangleAlert className="text-red-500 mx-auto" />
+          </div>
+          Sending assets to an unsupported network can cause permanent loss of
+          your funds.
+        </CardDescription>
       </CardContent>
     </motion.div>
   );

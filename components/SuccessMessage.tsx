@@ -32,7 +32,7 @@ export const PaymentSuccessMessage = ({ goTo }: Props) => {
       initial="hidden"
       animate="visible"
     >
-      <CardContent className="bg-muted flex flex-col items-center justify-center w-full rounded-xl p-3">
+      <CardContent className="bg-muted h-80 flex flex-col items-center justify-center w-full rounded-xl p-3">
         <Image
           src="/success.png"
           width="150"

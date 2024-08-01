@@ -62,7 +62,7 @@ export const CryptoStep2 = () => {
             >
               <div>
                 168.72
-                <span className="text-xs font-bold ml-1">USDT</span>
+                <span className="text-[9px] font-bold ml-1">USDT</span>
               </div>
             </span>
           </div>
