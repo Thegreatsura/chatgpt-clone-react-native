@@ -47,10 +47,10 @@ export const CryptoStep1 = () => {
       animate="visible"
       exit="exit"
     >
-      <CardHeader className="p-0">
+      {/* <CardHeader className="p-0">
         <CardTitle>Crypto Details</CardTitle>
-        {/* <CardDescription>Deploy your new project in one-click.</CardDescription> */}
-      </CardHeader>
+        <CardDescription>Deploy your new project in one-click.</CardDescription>
+      </CardHeader> */}
       <CardContent className="bg-muted rounded-xl p-3">
         <div className="grid gap-1">
           <div className="grid gap-2 relative">

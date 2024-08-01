@@ -15,6 +15,7 @@ import { useMultiplestepForm } from "../useMultiplestepForm";
 import { TelebirrStep1 } from "./telebirr-step1";
 import { TelebirrStep2 } from "./telebirr-step2";
 import { ChevronLeft } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export function Telebirr() {
   const {
@@ -26,17 +27,17 @@ export function Telebirr() {
     steps,
     goTo,
     showSuccessMsg,
-  } = useMultiplestepForm(2);
+  } = useMultiplestepForm(3);
 
   return (
     <>
       <CardHeader className="p-0 flex flex-row">
-        {!!(currentStepIndex !== 0) && (
-          <ChevronLeft
-            onClick={() => previousStep()}
-            className="mt-[6px] mr-2 bg-muted rounded-md"
-          />
-        )}
+        <ChevronLeft
+          onClick={() => previousStep()}
+          className={cn("mt-[6px] opacity-0 mr-2 bg-muted rounded-md", {
+            "opacity-100": currentStepIndex !== 0,
+          })}
+        />
         <CardTitle className="p-0 mt-0">Telebirr Details</CardTitle>
         {/* <CardDescription>Deploy your new project in one-click.</CardDescription> */}
       </CardHeader>
@@ -53,10 +54,11 @@ export function Telebirr() {
               <Button
                 className="w-full"
                 onClick={() => {
-                  goTo(1);
+                  // goTo(0);
+                  nextStep();
                 }}
               >
-                Pay
+                Continue
               </Button>
             ) : (
               <Button className="w-full" onClick={nextStep}>

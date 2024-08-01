@@ -213,7 +213,7 @@ export function DemoPaymentMethod() {
         </RadioGroup>
         <div className="flex items-center justify-center">
           <Button
-            className="lg:hidden"
+            className="lg:hidden py-0"
             onClick={() => {
               setDetail((prev) => !prev);
             }}

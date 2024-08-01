@@ -1,22 +1,21 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { RefreshCcw } from "lucide-react";
-// import { Button } from "../components/ui/button";
-// import successIcon from "../public/assets/success.png";
-import { Button } from "./ui/button";
 import { CardContent } from "./ui/card";
 
 const successVariants = {
   hidden: {
     opacity: 0,
-    y: 50,
+    x: -50,
   },
   visible: {
     opacity: 1,
-    y: 0,
+    x: 0,
+  },
+  exit: {
+    opacity: 0,
+    x: 50,
     transition: {
-      ease: "backIn",
-      duration: 0.6,
+      ease: "easeOut",
     },
   },
 };

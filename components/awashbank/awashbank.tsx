@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/card";
 import { ChevronLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { AwashBankStep2 } from "./awashbank-step2";
 
 export default function AwashBank() {
   const {
@@ -26,7 +27,7 @@ export default function AwashBank() {
     steps,
     goTo,
     showSuccessMsg,
-  } = useMultiplestepForm(2);
+  } = useMultiplestepForm(3);
 
   return (
     <>
@@ -49,7 +50,7 @@ export default function AwashBank() {
           <div className="w-full flex flex-col justify-between">
             <AnimatePresence mode="wait">
               {currentStepIndex === 0 && <AwashBankStep1 />}
-              {currentStepIndex === 1 && <div className="">"step two"</div>}
+              {currentStepIndex === 1 && <AwashBankStep2 />}
               {currentStepIndex === 2 && <PaymentSuccessMessage />}
             </AnimatePresence>
 
@@ -58,10 +59,11 @@ export default function AwashBank() {
                 <Button
                   className="w-full"
                   onClick={() => {
-                    goTo(1);
+                    // goTo(1);
+                    nextStep();
                   }}
                 >
-                  Pay
+                  Continue
                 </Button>
               ) : (
                 <Button className="w-full" onClick={nextStep}>
