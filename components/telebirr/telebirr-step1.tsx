@@ -58,12 +58,12 @@ export const TelebirrStep1 = () => {
               </Button>
             </div>
             <div className="grid gap-2 relative">
-              <Label htmlFor="email">Account Number</Label>
+              <Label htmlFor="email">Phone Number</Label>
               <Button
                 variant={"outline"}
                 className="flex justify-start md:w-full h-10 px-2 py-2"
               >
-                <p className="truncate">013351299415300</p>
+                <p className="truncate">0904536938</p>
               </Button>
             </div>
             <div className="grid gap-2 relative">

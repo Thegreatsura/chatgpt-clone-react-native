@@ -5,17 +5,16 @@ import { Button } from "@/components/ui/button";
 import { AnimatePresence } from "framer-motion";
 import { useMultiplestepForm } from "@/components/useMultiplestepForm";
 import { PaymentSuccessMessage } from "@/components/SuccessMessage";
-import { AwashBankStep1 } from "@/components/awashbank/awashbank-step1";
 import {
-  Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { CryptoStep1 } from "./crypto-step1";
 import { ChevronLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { CryptoStep1 } from "./crypto-step1";
+import { CryptoStep2 } from "./crypto-step2";
 
 export function Crypto() {
   const {
@@ -45,12 +44,12 @@ export function Crypto() {
         <div className="w-full flex flex-col justify-between">
           <AnimatePresence mode="wait">
             {currentStepIndex === 0 && <CryptoStep1 />}
-            {currentStepIndex === 1 && <div className="">step two</div>}
+            {currentStepIndex === 1 && <CryptoStep2 />}
             {currentStepIndex === 2 && <PaymentSuccessMessage />}
           </AnimatePresence>
 
           <CardFooter className="flex justify-between p-0 mt-2">
-            {isLastStep ? (
+            {!isLastStep ? (
               <Button
                 className="w-full"
                 onClick={() => {
@@ -60,11 +59,7 @@ export function Crypto() {
               >
                 Continue
               </Button>
-            ) : (
-              <Button className="w-full" onClick={nextStep}>
-                Continue
-              </Button>
-            )}
+            ) : null}
           </CardFooter>
         </div>
       </CardContent>

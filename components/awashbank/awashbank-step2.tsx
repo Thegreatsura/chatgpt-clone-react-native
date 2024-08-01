@@ -54,10 +54,13 @@ export const AwashBankStep2 = () => {
           <div className="grid gap-2 relative">
             <Label htmlFor="email">Email</Label>
             <Input id="email" placeholder="example@gmail.com" />
+            <p className="text-[9px]">
+              if you need notification about payment status
+            </p>
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="tnx">Transaction number</Label>
-            <Input id="tnx" placeholder="" />
+            <Label htmlFor="tnx">Awash transaction number</Label>
+            <Input id="tnx" placeholder="BDN3QWGGGH" />
           </div>
         </div>
       </CardContent>

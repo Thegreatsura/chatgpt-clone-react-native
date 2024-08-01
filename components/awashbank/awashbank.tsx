@@ -55,7 +55,7 @@ export default function AwashBank() {
             </AnimatePresence>
 
             <CardFooter className="flex justify-between p-0 mt-2">
-              {isLastStep ? (
+              {!isLastStep ? (
                 <Button
                   className="w-full"
                   onClick={() => {
@@ -65,11 +65,7 @@ export default function AwashBank() {
                 >
                   Continue
                 </Button>
-              ) : (
-                <Button className="w-full" onClick={nextStep}>
-                  Continue
-                </Button>
-              )}
+              ) : null}
             </CardFooter>
           </div>
         )}

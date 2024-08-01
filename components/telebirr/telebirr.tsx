@@ -50,7 +50,7 @@ export function Telebirr() {
           </AnimatePresence>
 
           <CardFooter className="flex justify-between p-0 mt-2">
-            {isLastStep ? (
+            {!isLastStep ? (
               <Button
                 className="w-full"
                 onClick={() => {
@@ -60,11 +60,7 @@ export function Telebirr() {
               >
                 Continue
               </Button>
-            ) : (
-              <Button className="w-full" onClick={nextStep}>
-                Continue
-              </Button>
-            )}
+            ) : null}
           </CardFooter>
         </div>
       </CardContent>
