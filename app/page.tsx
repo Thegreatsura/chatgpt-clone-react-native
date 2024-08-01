@@ -59,9 +59,9 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="relative z-20 px-10 mt-10">
+        {/* <div className="relative z-20 px-10 mt-10">
           <p>Payment summary</p>
-        </div>
+        </div> */}
 
         {/* <div className="relative z-20 mt-auto">
           <footer className="text-sm">Powered by surapay</footer>
