@@ -60,6 +60,11 @@ export const TelebirrStep1 = () => {
             <div className="grid gap-2 relative">
               <Label htmlFor="email">Phone Number</Label>
               <Button
+                onClick={() => {
+                  toast("Telebirr phone number copied", {
+                    description: "send it to the copied number",
+                  });
+                }}
                 variant={"outline"}
                 className="flex justify-start md:w-full h-10 px-2 py-2"
               >
@@ -69,6 +74,11 @@ export const TelebirrStep1 = () => {
             <div className="grid gap-2 relative">
               <Label htmlFor="email">Amount</Label>
               <span
+                onClick={() => {
+                  toast("Amount to be sent in Birr copied", {
+                    description: "Amount to be sent copied",
+                  });
+                }}
                 className={cn(
                   "flex !justify-start",
                   buttonVariants({ variant: "outline" })

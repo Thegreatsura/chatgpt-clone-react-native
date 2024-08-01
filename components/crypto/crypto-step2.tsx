@@ -86,15 +86,15 @@ export const CryptoStep2 = () => {
               </Button>
             </div>
           </div>
-          <div className="flex items-center justify-normal bg-muted p-2">
-            <Avatar className="h-20 w-20 rounded-none">
+          <div className="flex items-center justify-normal bg-muted p-1">
+            <Avatar className="h-20 w-20 rounded-lg">
               <AvatarImage
                 className="h-20 w-20"
                 src="/image.png"
                 alt="@shadcn"
               />
               <AvatarFallback className="mb-4 h-20 w-20">
-                <Skeleton className="mb-4 h-20 w-20" />
+                <Skeleton className="mb-4 h-20 w-20 !bg-zinc-500" />
               </AvatarFallback>
             </Avatar>
             <div className="p-1 space-y-1">

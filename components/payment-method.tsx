@@ -77,9 +77,18 @@ const Info = ({
 
 export function DemoPaymentMethod() {
   const [detail, setDetail] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [payed, setPayed] = useState(false);
   const [pending, setPending] = useState<boolean>(false);
   const [paymentMethod, setPaymentMethod] = useState("Crypto");
+
+  useEffect(() => {
+    const id = setTimeout(() => {
+      setLoading(true);
+    }, 1000 * 6);
+
+    return () => clearTimeout(id);
+  }, []);
 
   return (
     <Card className="relative flex flex-col h-full my-2">
@@ -156,7 +165,7 @@ export function DemoPaymentMethod() {
         </div>
         <CardTitle>Pay with {paymentMethod} </CardTitle>
         <CardDescription>
-          Add a new payment method to your account.
+          Pay with your choice of payment service.
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-3 pb-3">
@@ -230,6 +239,7 @@ export function DemoPaymentMethod() {
         )} */}
 
         <Paymentsteps
+          loading={loading}
           paymentMethod={paymentMethod as "Crypto" | "Telebirr" | "AwashBank"}
         />
       </CardContent>

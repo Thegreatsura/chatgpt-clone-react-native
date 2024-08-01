@@ -5,9 +5,10 @@ import { Telebirr } from "./telebirr/telebirr";
 
 type Props = {
   paymentMethod: "Crypto" | "Telebirr" | "AwashBank";
+  loading: boolean;
 };
 
-const Paymentsteps = ({ paymentMethod }: Props) => {
+const Paymentsteps = ({ paymentMethod, loading }: Props) => {
   switch (paymentMethod) {
     case "Telebirr":
       return <Telebirr />;
