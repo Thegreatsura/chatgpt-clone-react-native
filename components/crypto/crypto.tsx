@@ -45,7 +45,7 @@ export function Crypto() {
         <div className="w-full flex flex-col justify-between">
           <AnimatePresence mode="wait">
             {currentStepIndex === 0 && <CryptoStep1 />}
-            {currentStepIndex === 1 && <div className="">"step two"</div>}
+            {currentStepIndex === 1 && <div className="">step two</div>}
             {currentStepIndex === 2 && <PaymentSuccessMessage />}
           </AnimatePresence>
 

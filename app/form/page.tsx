@@ -29,10 +29,10 @@ export default function Home() {
       ) : (
         <div className="w-full flex flex-col justify-between">
           <AnimatePresence mode="wait">
-            {currentStepIndex === 0 && <div className="">"first one"</div>}
+            {currentStepIndex === 0 && <div className="">first one</div>}
             {currentStepIndex === 1 && <AwashBankStep1 />}
-            {currentStepIndex === 2 && <div className="">"first three"</div>}
-            {currentStepIndex === 3 && <div className="">"first four"</div>}
+            {currentStepIndex === 2 && <div className="">first three</div>}
+            {currentStepIndex === 3 && <div className="">first four</div>}
           </AnimatePresence>
 
           <CardFooter className="flex justify-between p-0 mt-2">
