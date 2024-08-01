@@ -32,19 +32,19 @@ const formVariants = {
   },
 };
 
-export const PlanForm = () => {
+export const AwashBankStep1 = () => {
   return (
     <motion.div
-      className="flex flex-col gap-5 p-2 rounded-xl"
+      className="flex flex-col gap-3 p-2 rounded-xl"
       variants={formVariants}
       initial="hidden"
       animate="visible"
       exit="exit"
     >
-      <CardHeader className="pb-0">
-        <CardTitle>Bank Detail</CardTitle>
-        {/* <CardDescription>Deploy your new project in one-click.</CardDescription> */}
-      </CardHeader>
+      {/* <CardHeader className="p-0">
+        <CardTitle>AwashBank Details</CardTitle>
+        <CardDescription>Deploy your new project in one-click.</CardDescription>
+      </CardHeader> */}
       <CardContent className="bg-muted rounded-xl p-3">
         <div>
           <div className="grid gap-4">
@@ -76,7 +76,7 @@ export const PlanForm = () => {
               >
                 <div>
                   168.72
-                  <span className="text-sm font-bold ml-1">Br</span>
+                  <span className="text-xs font-bold ml-1">Br</span>
                 </div>
               </span>
             </div>

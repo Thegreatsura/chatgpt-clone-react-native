@@ -7,8 +7,9 @@ import { useMultiplestepForm } from "@/components/useMultiplestepForm";
 import { PaymentSuccessMessage } from "@/components/SuccessMessage";
 import { AwashBankStep1 } from "@/components/awashbank/awashbank-step1";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { CryptoStep1 } from "./crypto-step1";
 
-export default function Home() {
+export function Crypto() {
   const {
     previousStep,
     nextStep,
@@ -18,7 +19,7 @@ export default function Home() {
     steps,
     goTo,
     showSuccessMsg,
-  } = useMultiplestepForm(4);
+  } = useMultiplestepForm(2);
 
   return (
     <CardContent className="p-0">
@@ -29,10 +30,9 @@ export default function Home() {
       ) : (
         <div className="w-full flex flex-col justify-between">
           <AnimatePresence mode="wait">
-            {currentStepIndex === 0 && <div className="">"first one"</div>}
-            {currentStepIndex === 1 && <AwashBankStep1 />}
-            {currentStepIndex === 2 && <div className="">"first three"</div>}
-            {currentStepIndex === 3 && <div className="">"first four"</div>}
+            {currentStepIndex === 0 && <CryptoStep1 />}
+            {currentStepIndex === 1 && <div className="">"step two"</div>}
+            {currentStepIndex === 2 && <PaymentSuccessMessage />}
           </AnimatePresence>
 
           <CardFooter className="flex justify-between p-0 mt-2">

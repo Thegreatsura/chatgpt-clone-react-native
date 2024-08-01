@@ -40,6 +40,8 @@ import { Modal, ModalTrigger } from "./ui/animated-modal";
 import { cn } from "@/lib/utils";
 import { hihi } from "@/action";
 import Link from "next/link";
+import Home from "@/app/form/page";
+import Paymentsteps from "./payment-steps";
 
 const Info = ({
   paymentMethod,
@@ -54,9 +56,14 @@ const Info = ({
         <img
           src="https://github.com/shadcn.png"
           alt="Product"
-          className="mx-auto mb-4 size-32 rounded-lg"
+          className="mx-auto mb-2 size-32 rounded-lg"
         />
         <p className="text-lg font-bold mb-1">Stubborn Attachments</p>
+        <div className="flex items-center justify-center">
+          <CardDescription>
+            Deploy your new project in one-click.
+          </CardDescription>
+        </div>
       </div>
       <span className="text-3xl p-2">
         {price}
@@ -128,7 +135,7 @@ export function DemoPaymentMethod() {
         </div>
       ) : null}
 
-      <CardHeader className="">
+      <CardHeader className="p-4">
         <div className="hidden md:flex lg:hidden flex-col items-center justify-center">
           <div className="flex flex-col items-center">
             <div className="text-center">
@@ -152,7 +159,7 @@ export function DemoPaymentMethod() {
           Add a new payment method to your account.
         </CardDescription>
       </CardHeader>
-      <CardContent className="grid gap-6">
+      <CardContent className="grid gap-3 pb-3">
         <RadioGroup
           onValueChange={(val) => {
             setPaymentMethod(val);
@@ -177,12 +184,12 @@ export function DemoPaymentMethod() {
           </div>
           <div>
             <RadioGroupItem
-              value="Awashbank"
-              id="Awashbank"
+              value="AwashBank"
+              id="AwashBank"
               className="peer sr-only"
             />
             <Label
-              htmlFor="Awashbank"
+              htmlFor="AwashBank"
               className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
             >
               <Awashbank className="mb-3 h-6 w-6" />
@@ -204,22 +211,29 @@ export function DemoPaymentMethod() {
             </Label>
           </div>
         </RadioGroup>
-        <Button
-          className="lg:hidden"
-          onClick={() => {
-            setDetail((prev) => !prev);
-          }}
-          variant={"ghost"}
-        >
-          {detail ? "Close" : "View Details"}{" "}
-        </Button>
-        {paymentMethod !== "Crypto" ? (
+        <div className="flex items-center justify-center">
+          <Button
+            className="lg:hidden"
+            onClick={() => {
+              setDetail((prev) => !prev);
+            }}
+            variant={"ghost"}
+          >
+            {detail ? "Close" : "View Details"}{" "}
+          </Button>
+        </div>
+
+        {/* {paymentMethod !== "Crypto" ? (
           <LocalBankCheckout />
         ) : (
           <CryptoCheckout />
-        )}
+        )} */}
+
+        <Paymentsteps
+          paymentMethod={paymentMethod as "Crypto" | "Telebirr" | "AwashBank"}
+        />
       </CardContent>
-      <CardFooter>
+      {/* <CardFooter>
         <Button
           disabled={pending || payed}
           onClick={() => {
@@ -254,9 +268,11 @@ export function DemoPaymentMethod() {
             Done
           </p>
         </Button>
-      </CardFooter>
-      <div className="flex-1" />
-      <p className="px-8 text-center text-sm text-muted-foreground">
+      </CardFooter> */}
+
+      {/* <div className="flex-1 bg-red-500" /> */}
+
+      {/* <p className="px-8 text-center text-sm text-muted-foreground">
         By clicking pay, you agree to our{" "}
         <Link
           href="/terms"
@@ -272,13 +288,14 @@ export function DemoPaymentMethod() {
           Privacy Policy
         </Link>
         .
-      </p>
+      </p> */}
     </Card>
   );
 }
 
 const LocalBankCheckout = () => {
   return (
+    // <Home />
     <div className="grid gap-6">
       <div className="grid gap-2 relative">
         <Label htmlFor="email">Email</Label>
