@@ -1,6 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
+import { Loader, LoaderCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const CheckIcon = ({ className }: { className?: string }) => {
@@ -62,7 +63,9 @@ const LoaderCore = ({
           >
             <div>
               {index > value && (
-                <CheckIcon className="text-black dark:text-white" />
+                // <Loader />
+                // <LoaderCircle />
+                <LoaderCircle className="text-black animate-spin dark:text-white" />
               )}
               {index <= value && (
                 <CheckFilled

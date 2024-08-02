@@ -25,22 +25,7 @@ import {
 } from "lucide-react";
 import { Awashbank, Crypto, Telebirr } from "./payment/icons";
 import { Skeleton } from "./ui/skeleton";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "./ui/sheet";
 import { FadeText } from "./magicui/fade-text";
-import { Modal, ModalTrigger } from "./ui/animated-modal";
-import { cn } from "@/lib/utils";
-import { hihi } from "@/action";
-import Link from "next/link";
-import Home from "@/app/form/page";
 import Paymentsteps from "./payment-steps";
 
 const Info = ({
@@ -173,8 +158,7 @@ export function DemoPaymentMethod() {
           onValueChange={(val) => {
             setPaymentMethod(val);
           }}
-          // defaultValue="Telebirr"
-          defaultValue={paymentMethod}
+          defaultValue="Telebirr"
           className="grid grid-cols-3 gap-4"
         >
           <div>
@@ -184,7 +168,7 @@ export function DemoPaymentMethod() {
               className="peer sr-only"
             />
             <Label
-              htmlFor="C"
+              htmlFor="Telebirr"
               className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
             >
               <Telebirr className="mb-3 h-6 w-6" />
