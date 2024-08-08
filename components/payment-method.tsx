@@ -27,6 +27,11 @@ import { Awashbank, Crypto, Telebirr } from "./payment/icons";
 import { Skeleton } from "./ui/skeleton";
 import { FadeText } from "./magicui/fade-text";
 import Paymentsteps from "./payment-steps";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 const Info = ({
   paymentMethod,
@@ -77,46 +82,60 @@ export function DemoPaymentMethod() {
 
   return (
     <Card className="relative flex flex-col h-full my-2">
-      <div className="flex relative lg:hidden w-full items-center justify-between space-x-2">
-        <div className="flex w-40 text-center items-center space-x-2">
-          <div
-            onClick={() => {
-              console.log("hi");
-            }}
-            className="size-4 hover:cursor-pointer hover:scale-105 hover:bg-primary-foreground mr-[2px] text-primary-foreground inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-          >
-            <ArrowLeft className="size-6 p-0 text-gray-500 group-hover:text-black " />
-          </div>
+      <DropdownMenu open={detail} onOpenChange={setDetail}>
+        <div className="flex relative lg:hidden w-full items-center justify-between space-x-2">
+          <div className="flex w-40 text-center items-center space-x-2">
+            <div
+              onClick={() => {
+                console.log("hi");
+              }}
+              className="size-4 hover:cursor-pointer hover:scale-105 hover:bg-primary-foreground mr-[2px] text-primary-foreground inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+            >
+              <ArrowLeft className="size-6 p-0 text-gray-500 group-hover:text-black " />
+            </div>
 
-          <div className="bg-gray-200 p-1 rounded-full">
-            <Avatar className="size-6">
-              <AvatarImage
-                src="https://github.com/shadcn.png"
-                alt="@shadcn"
-                className="size-6"
-              />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
+            <div className="bg-gray-200 p-1 rounded-full">
+              <Avatar className="size-6">
+                <AvatarImage
+                  src="https://github.com/shadcn.png"
+                  alt="@shadcn"
+                  className="size-6"
+                />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            </div>
+            <span className="text-gray-500 text-sm">SuraPay</span>
+            <div className="flex-1" />
           </div>
-          <span className="text-gray-500 text-sm">SuraPay</span>
-          <div className="flex-1" />
+          <DropdownMenuTrigger>
+            <span
+              onClick={() => {
+                setDetail((prev) => !prev);
+              }}
+              className="flex items-center hover:cursor-pointer text-xs text-gray-800 justify-end px-2 py-0.5 rounded-md"
+            >
+              Details
+              {detail ? (
+                <ChevronUp className="size-5" />
+              ) : (
+                <ChevronDown className="size-5" />
+              )}
+            </span>
+          </DropdownMenuTrigger>
         </div>
-        <span
-          onClick={() => {
-            setDetail((prev) => !prev);
-          }}
-          className="flex items-center hover:cursor-pointer text-xs text-gray-800 justify-end px-2 py-0.5 rounded-md"
-        >
-          Details
-          {detail ? (
-            <ChevronUp className="size-5" />
-          ) : (
-            <ChevronDown className="size-5" />
-          )}
-        </span>
-      </div>
+        <DropdownMenuContent className=" md:hidden w-screen">
+          <FadeText
+            className="z-100 mt-2 w-full left-1/2 transform -translate-x-1/2 bg-white dark:bg- text-4xl font-bold text-black dark:text-white"
+            direction="down"
+            framerProps={{
+              show: { transition: { delay: 0.6 } },
+            }}
+            text={<Info paymentMethod={paymentMethod} price="59" />}
+          />
+        </DropdownMenuContent>
+      </DropdownMenu>
 
-      {detail ? (
+      {/* {detail ? (
         <div className="h-full w-full">
           <FadeText
             className="absolute z-100 mt-2 w-full left-1/2 transform -translate-x-1/2 bg-white dark:bg- text-4xl font-bold text-black dark:text-white"
@@ -127,7 +146,7 @@ export function DemoPaymentMethod() {
             text={<Info paymentMethod={paymentMethod} price="59" />}
           />
         </div>
-      ) : null}
+      ) : null} */}
 
       <CardHeader className="p-4">
         <div className="hidden md:flex lg:hidden flex-col items-center justify-center">
@@ -212,7 +231,7 @@ export function DemoPaymentMethod() {
             }}
             variant={"ghost"}
           >
-            {detail ? "Close" : "View Details"}{" "}
+            {"View Details"}
           </Button>
         </div>
 
