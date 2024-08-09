@@ -11,7 +11,10 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="container relative h-full flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+    <div
+      style={{ backgroundColor: "" }}
+      className="container relative h-full flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0"
+    >
       {/* Left side */}
 
       <div className="relative hidden h-full flex-col p-10 text-white dark:border-r lg:flex">

@@ -26,7 +26,9 @@ export function Crypto() {
     steps,
     goTo,
     showSuccessMsg,
-  } = useMultiplestepForm(3);
+  } = useMultiplestepForm(2);
+
+  const next = () => {};
 
   return (
     <>
@@ -43,12 +45,11 @@ export function Crypto() {
       <CardContent className="p-0">
         <div className="w-full flex flex-col justify-between">
           <AnimatePresence mode="wait">
-            {currentStepIndex === 0 && <CryptoStep1 />}
+            {currentStepIndex === 0 && <CryptoStep1 next={nextStep} />}
             {currentStepIndex === 1 && <CryptoStep2 />}
-            {currentStepIndex === 2 && <PaymentSuccessMessage />}
           </AnimatePresence>
 
-          <CardFooter className="flex justify-between p-0 mt-2">
+          {/* <CardFooter className="flex justify-between p-0 mt-2">
             {!isLastStep ? (
               <Button
                 className="w-full"
@@ -60,7 +61,7 @@ export function Crypto() {
                 Continue
               </Button>
             ) : null}
-          </CardFooter>
+          </CardFooter> */}
         </div>
       </CardContent>
     </>
