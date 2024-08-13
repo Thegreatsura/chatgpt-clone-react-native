@@ -27,10 +27,10 @@ export const EnterprisePlanCard = () => {
                 <span className="font-semibold">Why this plan?</span>
               </div>
               <p className="text-sm text-gray-600">
-                We've recommended a plan tailored to your needs based on your
-                transaction volume. This plan is designed to provide the best
-                balance of features and efficiency, ensuring you get the most
-                value as your transaction activity grows.
+                We&aposve recommended a plan tailored to your needs based on
+                your transaction volume. This plan is designed to provide the
+                best balance of features and efficiency, ensuring you get the
+                most value as your transaction activity grows.
               </p>
             </div>
           </div>

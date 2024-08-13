@@ -27,7 +27,7 @@ export const SaleConfirmation = () => {
               <div className="w-12 h-12 bg-gray-300 rounded mr-2" />
               <div>
                 <p className="font-semibold">The pitch deck template that</p>
-                <p>doesn't suck</p>
+                <p>doesn&apost suck</p>
               </div>
             </div>
             <p className="font-semibold">$59.00</p>

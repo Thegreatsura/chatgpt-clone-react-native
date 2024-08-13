@@ -204,7 +204,7 @@ export const PaymentPageCustomization = () => {
                         <div>
                           <p className="font-semibold">Bank transfer</p>
                           <p className="text-sm text-gray-500">
-                            Get Raihan Fikri's details to pay from your bank
+                            Get Raihan Fikri&aposs details to pay from your bank
                             account
                           </p>
                         </div>
