@@ -13,10 +13,7 @@ export const OrderConfirmationCardV2 = ({
 }) => {
   return (
     <Card
-      className={cn(
-        "w-full bg-zinc-900 text-white rounded-3xl overflow-hidden shadow-xl my-2",
-        className
-      )}
+      className={cn("w-full bg-zinc-900 text-white overflow-hidden", className)}
     >
       <CardContent className="p-6">
         <div className="flex items-center mb-4">
