@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { ArrowLeft, Store } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { OrderConfirmationCardV2 } from "./test/comp/order-confirmation-card";
 
 export default function Home() {
   return (
@@ -24,7 +25,7 @@ export default function Home() {
             <div className="bg-zinc-900 h-10 w-10 mr-[2px] text-primary-foreground inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
               <ArrowLeft className="size-6 p-0 text-gray-500 group-hover:text-white " />
             </div>
-            <p className="flex items-center group-hover:hidden transition-all">
+            <div className="flex items-center group-hover:hidden transition-all">
               <div className="bg-gray-200 p-[3px] rounded-full mr-[2px]">
                 <Avatar className="size-4">
                   <AvatarImage
@@ -39,12 +40,12 @@ export default function Home() {
               </div>
               {/* <Store className="size-4 mr-[2px] rounded-lg" /> */}
               surapay
-            </p>
+            </div>
             <p className="hidden group-hover:block transition-all">back</p>
           </div>
 
           <div className="flex flex-col items-center justify-center mt-10">
-            <div className="flex flex-col items-center">
+            {/* <div className="flex flex-col items-center">
               <div className="text-center">
                 <img
                   src="https://github.com/shadcn.png"
@@ -54,11 +55,12 @@ export default function Home() {
                 <p className="text-lg font-bold mb-2">Stubborn Attachments</p>
               </div>
               <span className="text-3xl p-3">Br 160.76</span>
-            </div>
+            </div> */}
+            <OrderConfirmationCardV2 className="max-w-md" footer />
           </div>
 
           <div className="flex flex-col items-center justify-center">
-            <Separator className="my-4 w-96" />
+            {/* <Separator className="my-4 w-96" /> */}
           </div>
         </div>
 
@@ -73,10 +75,11 @@ export default function Home() {
 
       {/* Right side  */}
 
-      <div className="flex h-full lg:p-8">
-        <div className="mx-auto w-full flex-col justify-center space-y-6 sm:w-[350px]">
-          <DemoPaymentMethod />
-        </div>
+      <div className="flex h-full w-full lg:p-8">
+        <OrderConfirmationCardV2 footer />
+        {/* <div className="w-full flex-col justify-center space-y-6 sm:w-[350px]">
+        <DemoPaymentMethod />
+        </div> */}
       </div>
     </div>
   );
