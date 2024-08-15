@@ -54,18 +54,6 @@ const cryptoNetworks = [
     value: "binance-smart-chain",
     label: "Binance Smart Chain",
   },
-  {
-    value: "cardano",
-    label: "Cardano",
-  },
-  {
-    value: "cardano",
-    label: "Cardano",
-  },
-  {
-    value: "cardano",
-    label: "Cardano",
-  },
 ];
 
 const formVariants = {

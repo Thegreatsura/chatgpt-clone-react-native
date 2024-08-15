@@ -17,7 +17,7 @@ import { TelebirrStep2 } from "./telebirr-step2";
 import { ChevronLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export function Telebirr() {
+export function Telebirr({ className }: { className?: string }) {
   const {
     previousStep,
     nextStep,

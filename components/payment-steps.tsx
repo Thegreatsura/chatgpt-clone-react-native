@@ -6,16 +6,17 @@ import { Telebirr } from "./telebirr/telebirr";
 type Props = {
   paymentMethod: "Crypto" | "Telebirr" | "AwashBank";
   loading: boolean;
+  className?: string;
 };
 
-const Paymentsteps = ({ paymentMethod, loading }: Props) => {
+const Paymentsteps = ({ paymentMethod, loading, className }: Props) => {
   switch (paymentMethod) {
     case "Telebirr":
-      return <Telebirr />;
+      return <Telebirr className={className} />;
     case "AwashBank":
-      return <AwashBank />;
+      return <AwashBank className={className} />;
     case "Crypto":
-      return <Crypto />;
+      return <Crypto className={className} />;
 
     default:
       break;

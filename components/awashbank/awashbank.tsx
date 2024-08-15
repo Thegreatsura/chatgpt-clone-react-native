@@ -17,7 +17,7 @@ import { ChevronLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AwashBankStep2 } from "./awashbank-step2";
 
-export default function AwashBank() {
+export default function AwashBank({ className }: { className?: string }) {
   const {
     previousStep,
     nextStep,

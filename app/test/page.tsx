@@ -18,6 +18,7 @@ import { DepositModal } from "./comp/deposit-modal";
 import { LandingPageAgency } from "./comp/digital-agency-landing-page";
 import { OrderConfirmationCardV2 } from "./comp/order-confirmation-card";
 import { PreferencesComponent } from "./comp/preferences-component";
+import { ApiKeyDashboard } from "./comp/api-keys-dashboard";
 
 //bad
 import { AIModelSelector } from "./comp/ai-model-selector-ui";
@@ -29,6 +30,9 @@ import { Portfolio } from "./comp/nextjs-shadcn-portfolio";
 import { PortfolioV2 } from "./comp/profile-page-component";
 import { StripeCheckoutClone } from "./comp/stripe-checkout-clone";
 import { SubscriptionPaymentForm } from "./comp/subscription-payment-form";
+import { RevenueOverview } from "./comp/payment-gateway-overview";
+import { ProfileGallery } from "./comp/profile-gallery-component";
+import { UsageDashboard } from "./comp/usage-dashboard";
 
 const Page = () => {
   // return (
@@ -37,7 +41,7 @@ const Page = () => {
   //   </div>
   // );
 
-  return <OrderConfirmationCardV2 />;
+  return <UsageDashboard />;
 };
 
 export default Page;

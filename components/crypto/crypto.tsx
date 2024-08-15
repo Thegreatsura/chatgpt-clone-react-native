@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils";
 import { CryptoStep1 } from "./crypto-step1";
 import { CryptoStep2 } from "./crypto-step2";
 
-export function Crypto() {
+export function Crypto({ className }: { className?: string }) {
   const {
     previousStep,
     nextStep,

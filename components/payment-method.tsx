@@ -33,7 +33,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
-const Info = ({
+export const Info = ({
   paymentMethod,
   price,
 }: {
