@@ -1,0 +1,158 @@
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { Separator } from "@/components/ui/separator"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { ChevronDown, Search, Home, GitBranch, Eye, AtSign, Folder, Globe, MoreHorizontal, Info, AlertCircle } from 'lucide-react'
+
+export default function ExactDashboardCloneWithSeparators() {
+  return (
+    <div className="flex h-screen bg-gray-50">
+      {/* Sidebar */}
+      <aside className="w-60 bg-white p-4 hidden md:block border-r border-gray-200">
+        {/* Sidebar content remains the same */}
+      </aside>
+
+      {/* Main content */}
+      <main className="flex-1 p-8 overflow-auto">
+        <header className="flex justify-between items-center mb-8">
+          {/* Header content remains the same */}
+        </header>
+
+        <Card className="mb-8 bg-white border-none shadow-sm">
+          {/* "Your team has 5 new branches" card content remains the same */}
+        </Card>
+
+        <div className="grid md:grid-cols-2 gap-8 mb-8">
+          <Card className="bg-white border-none shadow-sm">
+            <CardHeader className="flex flex-row items-center justify-between py-5 px-6">
+              <div className="flex items-center space-x-2">
+                <GitBranch className="w-5 h-5 text-gray-400" />
+                <CardTitle className="text-base font-semibold">Latest Branches</CardTitle>
+              </div>
+              <Button variant="ghost" size="sm" className="text-gray-500 font-medium">See All</Button>
+            </CardHeader>
+            <CardContent className="px-6 pb-6 pt-0">
+              <ScrollArea className="h-[180px] pr-4">
+                {[
+                  { name: 'fat/iconsv2', version: 'v2', eng: 'ENG-203', avatar: '/placeholder.svg?height=24&width=24', time: '26m' },
+                  { name: 'mdo/newapi', version: 'v1', avatar: '/placeholder.svg?height=24&width=24', time: '45m' },
+                  { name: 'alex/supabase-store2', version: 'v1', avatar: '/placeholder.svg?height=24&width=24', time: '7h' },
+                  { name: 'ian/cachev3', version: 'v2', avatar: '/placeholder.svg?height=24&width=24', time: '1d' },
+                ].map((branch, index, array) => (
+                  <div key={branch.name}>
+                    <div className="flex items-center justify-between py-3">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                        <span className="font-medium">{branch.name}</span>
+                        <span className="text-xs text-gray-400 font-medium">{branch.version}</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        {branch.eng && <span className="text-xs text-gray-400 font-medium">{branch.eng}</span>}
+                        <Avatar className="w-6 h-6">
+                          <AvatarImage src={branch.avatar} />
+                          <AvatarFallback>{branch.name[0].toUpperCase()}</AvatarFallback>
+                        </Avatar>
+                        <span className="text-sm text-gray-400">{branch.time}</span>
+                      </div>
+                    </div>
+                    {index < array.length - 1 && <Separator className="my-1 bg-gray-100" />}
+                  </div>
+                ))}
+              </ScrollArea>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-white border-none shadow-sm">
+            <CardHeader className="flex flex-row items-center justify-between py-5 px-6">
+              <div className="flex items-center space-x-2">
+                <AlertCircle className="w-5 h-5 text-gray-400" />
+                <CardTitle className="text-base font-semibold">Linear Tasks</CardTitle>
+              </div>
+              <div className="flex space-x-2">
+                <Button variant="outline" size="sm" className="text-xs font-medium">Open</Button>
+                <Button variant="outline" size="sm" className="text-xs font-medium">Assigned to You</Button>
+                <Button variant="ghost" size="sm" className="text-gray-500 font-medium">See All</Button>
+              </div>
+            </CardHeader>
+            <CardContent className="px-6 pb-6 pt-0">
+              <ScrollArea className="h-[180px] pr-4">
+                {[
+                  { task: 'Fix Discord integration', eng: 'ENG-234' },
+                  { task: 'Review CSS Colors', eng: 'BUG-1934' },
+                  { task: 'Add Inter', eng: 'ENG-234' },
+                  { task: 'Polish cmd+k', eng: 'ENG-234' },
+                ].map((item, index, array) => (
+                  <div key={item.task}>
+                    <div className="flex items-center justify-between py-3">
+                      <span className="font-medium">{item.task}</span>
+                      <div className="flex items-center space-x-3">
+                        <span className="text-xs text-gray-400 font-medium">{item.eng}</span>
+                        <MoreHorizontal className="w-4 h-4 text-gray-400" />
+                      </div>
+                    </div>
+                    {index < array.length - 1 && <Separator className="my-1 bg-gray-100" />}
+                  </div>
+                ))}
+              </ScrollArea>
+            </CardContent>
+          </Card>
+        </div>
+
+        <Card className="mb-8 bg-white border-none shadow-sm">
+          <CardHeader className="py-5 px-6">
+            <CardTitle className="text-lg font-semibold">Suggested Reviews</CardTitle>
+            <p className="text-sm text-gray-500">We suggest branches from your team you would likely be a good reviewer.</p>
+          </CardHeader>
+          <CardContent className="px-6 pb-6 pt-0">
+            <div className="space-y-4">
+              {[
+                { name: 'Icons Added', version: 'v2', description: 'This branch needs review on CSS Changes', time: '16m to review', avatar: '/placeholder.svg?height=24&width=24', ago: '3m' },
+                { name: 'New Git API', version: 'v2', description: 'Alex created a new Tooltip.tsx file, plus additional changes', time: '16m to review', avatar: '/placeholder.svg?height=24&width=24', ago: '12m' },
+              ].map((review, index, array) => (
+                <div key={review.name}>
+                  <div className="flex items-center justify-between py-2">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                        <GitBranch className="w-5 h-5 text-purple-600" />
+                      </div>
+                      <div>
+                        <div className="flex items-center space-x-2">
+                          <p className="font-medium">{review.name}</p>
+                          <span className="text-xs text-gray-400 font-medium">{review.version}</span>
+                        </div>
+                        <p className="text-sm text-gray-500">{review.description}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <span className="text-xs text-gray-400">{review.time}</span>
+                      <Avatar className="w-6 h-6">
+                        <AvatarImage src={review.avatar} />
+                        <AvatarFallback>{review.name[0]}</AvatarFallback>
+                      </Avatar>
+                      <span className="text-sm text-gray-400">{review.ago}</span>
+                    </div>
+                  </div>
+                  {index < array.length - 1 && <Separator className="my-4 bg-gray-100" />}
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-white border-none shadow-sm">
+          {/* Code Analysis card content remains the same */}
+        </Card>
+
+        <div className="mt-8 bg-gray-100 rounded-lg p-4">
+          {/* "New in the Changelog" section remains the same */}
+        </div>
+
+        <div className="flex items-center space-x-2 mt-4">
+          {/* User profile snippet remains the same */}
+        </div>
+      </main>
+    </div>
+  )
+}

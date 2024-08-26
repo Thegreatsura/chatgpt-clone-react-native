@@ -1,0 +1,140 @@
+'use client'
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import Image from "next/image"
+import { useEffect, useState } from "react"
+import Confetti from 'react-confetti'
+
+interface SaleConfirmationProps {
+  orderNumber: string;
+  date: string;
+  name: string;
+  email: string;
+  productName: string;
+  productImage: string;
+  licenseType: string;
+  price: string;
+  backgroundColor?: string;
+  cardBackgroundColor?: string;
+  headerBackgroundColor?: string;
+  textColor?: string;
+  accentColor?: string;
+  borderRadius?: string;
+  fontSize?: {
+    title?: string;
+    body?: string;
+    price?: string;
+  };
+  fontWeight?: {
+    title?: string;
+    body?: string;
+    price?: string;
+  };
+  showConfetti?: boolean;
+  confettiDuration?: number;
+  productImageSize?: string;
+}
+
+export default function SaleConfirmation({
+  orderNumber,
+  date,
+  name,
+  email,
+  productName,
+  productImage,
+  licenseType,
+  price,
+  backgroundColor = 'bg-gradient-to-br from-teal-500 to-teal-700',
+  cardBackgroundColor = 'bg-white',
+  headerBackgroundColor = 'bg-gradient-to-r from-purple-600 to-indigo-600',
+  textColor = 'text-gray-900',
+  accentColor = 'text-indigo-600',
+  borderRadius = 'rounded-3xl',
+  fontSize = {
+    title: 'text-3xl',
+    body: 'text-sm',
+    price: 'text-2xl',
+  },
+  fontWeight = {
+    title: 'font-bold',
+    body: 'font-medium',
+    price: 'font-bold',
+  },
+  showConfetti = true,
+  confettiDuration = 5000,
+  productImageSize = 'w-20 h-20',
+}: SaleConfirmationProps) {
+  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 })
+  const [showConfettiState, setShowConfettiState] = useState(showConfetti)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight })
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    
+    if (showConfetti) {
+      const timer = setTimeout(() => setShowConfettiState(false), confettiDuration)
+      return () => clearTimeout(timer)
+    }
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [showConfetti, confettiDuration])
+
+  return (
+    <div className={`flex items-center justify-center min-h-screen ${backgroundColor} p-4`}>
+      {showConfettiState && <Confetti width={windowSize.width} height={windowSize.height} recycle={false} />}
+      <Card className={`w-full max-w-md ${cardBackgroundColor} ${borderRadius} shadow-xl overflow-hidden transition-all duration-300 ease-in-out hover:shadow-2xl`}>
+        <CardHeader className={`${headerBackgroundColor} text-white`}>
+          <CardTitle className={`${fontSize.title} ${fontWeight.title} text-center`}>Woohoo! You made a sale!</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6 p-6">
+          <div className="relative w-full h-48 bg-indigo-600 rounded-xl overflow-hidden">
+            <div className="absolute inset-0">
+              {Array.from({ length: 30 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute rounded-full bg-opacity-50 animate-pulse"
+                  style={{
+                    width: `${Math.random() * 30 + 10}px`,
+                    height: `${Math.random() * 30 + 10}px`,
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    backgroundColor: ['#FFC107', '#FF5722', '#03A9F4', '#4CAF50', '#E91E63'][Math.floor(Math.random() * 5)],
+                    animationDuration: `${Math.random() * 3 + 2}s`,
+                  }}
+                />
+              ))}
+            </div>
+            <svg className="absolute w-20 h-20 text-yellow-400 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-bounce" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8zm4-9c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm-8 0c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm5.181 3.088c.566.566 1.32.879 2.121.879s1.555-.313 2.121-.879c.39-.39.39-1.024 0-1.414-.39-.39-1.024-.39-1.414 0-.566.566-1.32.879-2.121.879s-1.555-.313-2.121-.879c-.39-.39-1.024-.39-1.414 0-.39.39-.39 1.024 0 1.414.566.566 1.32.879 2.121.879s1.555-.313 2.121-.879z" />
+            </svg>
+          </div>
+          <div className="space-y-2">
+            <p className={`${fontSize.body} ${fontWeight.body} text-gray-500`}>Order #: <span className={`${fontWeight.body} ${textColor}`}>{orderNumber}</span></p>
+            <p className={`${fontSize.body} ${fontWeight.body} text-gray-500`}>Date: <span className={`${fontWeight.body} ${textColor}`}>{date}</span></p>
+            <p className={`${fontSize.body} ${fontWeight.body} text-gray-500`}>Name: <span className={`${fontWeight.body} ${textColor}`}>{name}</span></p>
+            <p className={`${fontSize.body} ${fontWeight.body} text-gray-500`}>Email: <span className={`${fontWeight.body} ${textColor}`}>{email}</span></p>
+          </div>
+          <div className="flex items-center space-x-4 pt-4 border-t group">
+            <div className={`${productImageSize} bg-gray-200 rounded-md overflow-hidden transition-transform duration-300 ease-in-out group-hover:scale-105`}>
+              <Image
+                src={productImage}
+                alt="Product image"
+                width={80}
+                height={80}
+                className="object-cover w-full h-full"
+              />
+            </div>
+            <div className="flex-1">
+              <h3 className={`${fontSize.body} ${fontWeight.body} ${textColor} group-hover:${accentColor} transition-colors duration-300`}>{productName}</h3>
+              <p className={`${fontSize.body} text-gray-500`}>{licenseType}</p>
+            </div>
+            <div className={`${fontSize.price} ${fontWeight.price} ${accentColor}`}>{price}</div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}

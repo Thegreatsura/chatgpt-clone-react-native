@@ -23,6 +23,7 @@ import { UsageDashboard } from "./comp/usage-dashboard";
 import { ActivityDashboard } from "./test-comp/ActivityDashboard";
 import { AIServiceLandingPage } from "./test-comp/AIServiceLandingPage";
 import { SkinCareCard } from "./test-comp/skin-care-card";
+import { ArtoClone } from "./brand/ArtoClone";
 
 //bad
 import { AIModelSelector } from "./comp/ai-model-selector-ui";
@@ -46,9 +47,12 @@ import { MessageInput } from "./test-comp/MessageInput";
 import { ProfileCard } from "./test-comp/profile-card-component";
 import { TwoFactorAuthAndTransaction } from "./test-comp/TwoFactorAuthAndTransaction";
 import { UserProfileDropdown } from "./test-comp/UserProfileDropdown";
+import { ArtoCloneV2 } from "./brand/CustomizableArtoClone";
+import { SaleConfirmationV3 } from "./brand/CustomizableSaleConfirmation";
+import { DashboardV2 } from "./brand/Dashboard";
 
 const Page = () => {
-  return <AIServiceLandingPage />;
+  return <ApiKeyDashboard />;
   // return (
   //   <div className="h-screen w-full flex items-center justify-center">
   //     <PreferencesComponent />

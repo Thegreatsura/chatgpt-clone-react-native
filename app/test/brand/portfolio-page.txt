@@ -1,0 +1,72 @@
+// pages/index.js
+import Head from 'next/head'
+import Image from 'next/image'
+
+export default function Home() {
+  return (
+    <div className="min-h-screen bg-gray-900 text-white">
+      <Head>
+        <title>Zane Ashford - Designer from Auckland</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <main className="container mx-auto px-4 py-16">
+        <div className="bg-gray-800 rounded-lg shadow-lg p-8">
+          <h1 className="text-3xl font-bold mb-2">Hi, I'm Zane Ashford.</h1>
+          <p className="text-xl mb-4">Designer from Auckland<sup>13°</sup></p>
+          <p className="text-gray-400 mb-6">
+            Currently, I'm designing at the visionOS team at Apple and
+            building simple and functional Framer templates on the side.
+          </p>
+          <div className="space-x-4">
+            <button className="bg-gray-700 px-4 py-2 rounded">About me</button>
+            <button className="bg-gray-700 px-4 py-2 rounded">Email</button>
+          </div>
+
+          <div className="mt-12">
+            <h2 className="text-2xl font-semibold mb-4">Featured Work</h2>
+            <div className="bg-gray-700 rounded-lg p-4">
+              <Image
+                src="/dashfolio-neo.png"
+                alt="Dashfolio Neo Template"
+                width={300}
+                height={200}
+                className="rounded-lg mb-2"
+              />
+              <p className="font-semibold">Dashfolio Neo</p>
+              <p className="text-sm text-gray-400">Template</p>
+            </div>
+          </div>
+
+          <div className="mt-12">
+            <h2 className="text-2xl font-semibold mb-4">Blog</h2>
+            <ul className="space-y-4">
+              <li className="flex justify-between">
+                <span>A Productivity Hack by Pareto</span>
+                <span className="text-gray-400">Aug 7, 2024</span>
+              </li>
+              <li className="flex justify-between">
+                <span>Diversity, then focus.</span>
+                <span className="text-gray-400">Mar 1, 2024</span>
+              </li>
+              <li className="flex justify-between">
+                <span>Proactivity > Reactivity</span>
+                <span className="text-gray-400">Jan 20, 2024</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </main>
+
+      <nav className="fixed left-4 top-1/2 transform -translate-y-1/2">
+        <ul className="space-y-4">
+          <li><button className="text-gray-400 hover:text-white">@</button></li>
+          <li><button className="text-gray-400 hover:text-white">#</button></li>
+          <li><button className="text-gray-400 hover:text-white">□</button></li>
+          <li><button className="text-gray-400 hover:text-white">▽</button></li>
+          <li><button className="text-gray-400 hover:text-white">○</button></li>
+        </ul>
+      </nav>
+    </div>
+  )
+}

@@ -1,0 +1,147 @@
+'use client'
+
+import { useState } from 'react'
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Slider } from "@/components/ui/slider"
+import { Switch } from "@/components/ui/switch"
+import { ArrowLeft, Sun, Moon, Laptop, Type, PanelTopClose, Play, Image, Home, Heart, Menu, Bookmark, Plus } from 'lucide-react'
+
+export default function Component() {
+  const [theme, setTheme] = useState('dark')
+  const [accentColor, setAccentColor] = useState('blue')
+  const [textSize, setTextSize] = useState(50)
+  const [brightness, setBrightness] = useState(80)
+
+  const accentColors = ['blue', 'yellow', 'green', 'purple', 'pink']
+
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-zinc-950">
+      <Card className="w-[380px] bg-zinc-900 text-zinc-100">
+        <CardContent className="p-6">
+          <div className="flex justify-between items-center mb-6">
+            <Button variant="ghost" size="icon">
+              <ArrowLeft className="h-6 w-6" />
+            </Button>
+            <h2 className="text-xl font-semibold">Preferences</h2>
+            <Button variant="ghost" size="sm" className="text-sm">
+              Save
+            </Button>
+          </div>
+
+          <div className="space-y-6">
+            <div>
+              <h3 className="flex items-center text-sm font-medium mb-4">
+                <Sun className="mr-2 h-4 w-4" />
+                Appearance
+              </h3>
+              <div className="grid grid-cols-3 gap-2">
+                {['light', 'dark', 'auto'].map((mode) => (
+                  <Button
+                    key={mode}
+                    variant={theme === mode ? "secondary" : "outline"}
+                    className="h-20 w-full"
+                    onClick={() => setTheme(mode)}
+                  >
+                    {mode === 'light' && <Sun className="h-4 w-4 mb-2" />}
+                    {mode === 'dark' && <Moon className="h-4 w-4 mb-2" />}
+                    {mode === 'auto' && <Laptop className="h-4 w-4 mb-2" />}
+                    <span className="block">{mode.charAt(0).toUpperCase() + mode.slice(1)}</span>
+                  </Button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="flex items-center text-sm font-medium mb-4">
+                <PanelTopClose className="mr-2 h-4 w-4" />
+                Accent color
+              </h3>
+              <div className="flex space-x-2">
+                {accentColors.map((color) => (
+                  <Button
+                    key={color}
+                    variant="outline"
+                    className={`w-8 h-8 rounded-full ${accentColor === color ? 'ring-2 ring-offset-2 ring-offset-zinc-900 ring-white' : ''}`}
+                    style={{ backgroundColor: color }}
+                    onClick={() => setAccentColor(color)}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="flex items-center text-sm font-medium mb-4">
+                <Type className="mr-2 h-4 w-4" />
+                Text size
+              </h3>
+              <div className="flex items-center">
+                <span className="mr-2 text-sm">A</span>
+                <Slider
+                  value={[textSize]}
+                  onValueChange={(value) => setTextSize(value[0])}
+                  max={100}
+                  step={1}
+                  className="flex-1"
+                />
+                <span className="ml-2 text-base font-medium">A</span>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="flex items-center text-sm font-medium mb-4">
+                <Sun className="mr-2 h-4 w-4" />
+                Brightness
+              </h3>
+              <div className="flex items-center bg-zinc-800 rounded-md p-2">
+                <Slider
+                  value={[brightness]}
+                  onValueChange={(value) => setBrightness(value[0])}
+                  max={100}
+                  step={1}
+                  className="flex-1"
+                />
+                <span className="ml-2 text-sm font-medium">{brightness}%</span>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              {[
+                { icon: <PanelTopClose className="h-4 w-4" />, label: 'Reduce motion' },
+                { icon: <Play className="h-4 w-4" />, label: 'Auto play' },
+                { icon: <Image className="h-4 w-4" />, label: 'High quality photo' },
+              ].map(({ icon, label }) => (
+                <div key={label} className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    {icon}
+                    <span className="ml-2 text-sm">{label}</span>
+                  </div>
+                  <Switch />
+                </div>
+              ))}
+            </div>
+          </div>
+        </CardContent>
+
+        <div className="flex justify-between items-center p-4 border-t border-zinc-800">
+          <Button variant="ghost" size="icon">
+            <Home className="h-6 w-6" />
+          </Button>
+          <Button variant="ghost" size="icon">
+            <Heart className="h-6 w-6" />
+            <span className="absolute top-0 right-0 -mt-1 -mr-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">12</span>
+          </Button>
+          <Button variant="ghost" size="icon">
+            <Menu className="h-6 w-6" />
+          </Button>
+          <Button variant="ghost" size="icon">
+            <Bookmark className="h-6 w-6" />
+          </Button>
+          <Button variant="ghost" size="icon">
+            <Plus className="h-6 w-6" />
+          </Button>
+        </div>
+      </Card>
+    </div>
+  )
+}
