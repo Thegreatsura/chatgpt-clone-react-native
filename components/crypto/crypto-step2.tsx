@@ -12,6 +12,18 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogTitle,
+  DialogImage,
+  DialogSubtitle,
+  DialogClose,
+  DialogDescription,
+  DialogContainer,
+  DialogBaner,
+} from "@/components/ui/custom-dialog";
 import { cn } from "@/lib/utils";
 import { Dot } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
@@ -87,16 +99,50 @@ export const CryptoStep2 = () => {
             </div>
           </div>
           <div className="flex items-center justify-normal bg-muted p-1">
-            <Avatar className="h-20 w-20 rounded-lg">
-              <AvatarImage
-                className="h-20 w-20"
-                src="/image.png"
-                alt="@shadcn"
-              />
-              <AvatarFallback className="mb-4 h-20 w-20">
-                <Skeleton className="mb-4 h-20 w-20 !bg-zinc-500" />
-              </AvatarFallback>
-            </Avatar>
+            <Dialog
+              transition={{
+                type: "spring",
+                bounce: 0.05,
+                duration: 0.25,
+              }}
+            >
+              <DialogTrigger
+                style={{
+                  borderRadius: "12px",
+                }}
+                className="flex max-w-[270px] flex-col overflow-hidden border border-zinc-950/10 bg-white dark:border-zinc-50/10 dark:bg-zinc-900"
+              >
+                <DialogBaner className="h-20 w-20">
+                  <Avatar className="h-20 w-20 rounded-lg">
+                    <AvatarImage
+                      className="h-20 w-20"
+                      src="/image.png"
+                      alt="@shadcn"
+                    />
+                    <AvatarFallback className="mb-4 h-20 w-20">
+                      <Skeleton className="mb-4 h-20 w-20 !bg-zinc-500" />
+                    </AvatarFallback>
+                  </Avatar>
+                </DialogBaner>
+              </DialogTrigger>
+              <DialogContainer>
+                <DialogContent
+                  style={{
+                    borderRadius: "24px",
+                  }}
+                  className="pointer-events-auto relative flex h-auto w-full flex-col overflow-hidden border border-zinc-950/10 bg-white dark:border-zinc-50/10 dark:bg-zinc-900 sm:w-[500px]"
+                >
+                  <DialogImage
+                    src="/image.png"
+                    alt="A desk lamp designed by Edouard Wilfrid Buquet in 1925. It features a double-arm design and is made from nickel-plated brass, aluminium and varnished wood."
+                    className="h-full w-full"
+                  />
+
+                  {/* <DialogClose className="text-zinc-50" /> */}
+                </DialogContent>
+              </DialogContainer>
+            </Dialog>
+
             <div className="p-1 space-y-1">
               <div className="flex items-center space-x-1">
                 <Dot className="size-8" />

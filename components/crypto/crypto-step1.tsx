@@ -33,9 +33,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Bold, Italic, Underline } from "lucide-react";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { ModeToggle } from "../toggle";
+import { useState } from "react";
 
 const formSchema = z.object({
   network: z.string().min(2, { message: "select blockchain network" }),
@@ -78,6 +82,7 @@ type Props = {
   next: () => void;
 };
 export const CryptoStep1 = ({ next }: Props) => {
+  const [Network, setNetwork] = useState<string | undefined>();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -101,63 +106,82 @@ export const CryptoStep1 = ({ next }: Props) => {
       animate="visible"
       exit="exit"
     >
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <CardContent className="flex flex-col gap-4 h-[228px] bg-muted rounded-xl p-3">
-            {/* <CryptoNetworks /> */}
-            <FormField
-              control={form.control}
-              name="network"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Network</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Select a Network" />
-                      </SelectTrigger>
-                    </FormControl>
+      <CardContent className="flex items-center justify-center flex-col gap-4 h-[228px] bg-muted rounded-xl p-3">
+        <ToggleGroup
+          className="flex flex-col p-3"
+          onValueChange={(value) => setNetwork(value)}
+          type="single"
+        >
+          <div className="flex gap-2">
+            <ToggleGroupItem
+              className="data-[state=on]:bg-black/10 dark:data-[state=on]:bg-white/10"
+              value="btc"
+              aria-label="Toggle bold"
+            >
+              {/* Ethereum  */}
+              ERC-20
+            </ToggleGroupItem>
+            <ToggleGroupItem
+              className="data-[state=on]:bg-black/10 dark:data-[state=on]:bg-white/10"
+              value="eth"
+              aria-label="Toggle italic"
+            >
+              {/* Tron  */}
+              TRC-20
+            </ToggleGroupItem>
+            <ToggleGroupItem
+              className="data-[state=on]:bg-black/10 dark:data-[state=on]:bg-white/10"
+              value="hello"
+              aria-label="Toggle underline"
+            >
+              {/* <span className="hidden sm:block">Binance Smart Chain</span>{" "} */}
+              BEP-20
+              {/* or BSC */}
+            </ToggleGroupItem>
+          </div>
 
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Blockchain networks</SelectLabel>
-                        {cryptoNetworks.map((network) => {
-                          return (
-                            <SelectItem
-                              key={network.value}
-                              value={network.value}
-                            >
-                              {network.label}
-                            </SelectItem>
-                          );
-                        })}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
+          <div className="flex gap-2">
+            <ToggleGroupItem
+              className="data-[state=on]:bg-black/10 dark:data-[state=on]:bg-white/10"
+              value="hihi"
+              aria-label="Toggle bold"
+            >
+              {/* Solana  */}
+              SPL
+            </ToggleGroupItem>
+            <ToggleGroupItem
+              className="data-[state=on]:bg-black/10 dark:data-[state=on]:bg-white/10"
+              value="non"
+              aria-label="Toggle italic"
+            >
+              {/* Polygon  */}
+              MATIC
+            </ToggleGroupItem>
+          </div>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <CardDescription className="text-center p-2 bg-red-300/40 rounded-lg">
-              <div className="flex m-2">
-                <TriangleAlert className="text-red-500 mx-auto" />
-              </div>
-              Sending assets to an unsupported network can cause permanent loss
-              of your funds.
-            </CardDescription>
-          </CardContent>
-          <CardFooter className="flex justify-between p-0 mt-2">
-            <Button type="submit" className="w-full" onClick={() => {}}>
-              Continue
-            </Button>
-          </CardFooter>
-        </form>
-      </Form>
+          <div>
+            <ToggleGroupItem
+              className="data-[state=on]:bg-black/10 dark:data-[state=on]:bg-white/10"
+              value="chick"
+              aria-label="Toggle underline"
+            >
+              {/* Algorand  */}
+              ALGO
+            </ToggleGroupItem>
+          </div>
+        </ToggleGroup>
+      </CardContent>
+      <CardFooter className="flex justify-between p-0 mt-2">
+        <Button
+          disabled={!!!Network?.trim()}
+          className="w-full"
+          onClick={() => {
+            next();
+          }}
+        >
+          Continue
+        </Button>
+      </CardFooter>
     </motion.div>
   );
 };
