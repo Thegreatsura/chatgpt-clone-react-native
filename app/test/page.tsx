@@ -50,14 +50,25 @@ import { UserProfileDropdown } from "./test-comp/UserProfileDropdown";
 import { ArtoCloneV2 } from "./brand/CustomizableArtoClone";
 import { SaleConfirmationV3 } from "./brand/CustomizableSaleConfirmation";
 import { DashboardV2 } from "./brand/Dashboard";
+import { BlackcessLogo } from "./test/BlackcessLogo";
+import { ProductManagementV2 } from "./test/product-managementV2";
+
+import { ComingSoonEditor } from "./test/coming-soon-editor";
+import { BlackcessLogoV2 } from "./test/BlackcessLogov2";
+import { ComingSoonEditorV2 } from "./test/coming-soon-editorV2";
+import { ProductManagement } from "./test/product-management";
+import { TaskManagerHome } from "./test/task-manager-home";
+import { TaskManagerHomeV2 } from "./test/task-summary";
+import { Waiting } from "./test/WaitaLandingPage";
+import { DialogBasicOne } from "./dialog-test";
 
 const Page = () => {
-  return <ApiKeyDashboard />;
-  // return (
-  //   <div className="h-screen w-full flex items-center justify-center">
-  //     <PreferencesComponent />
-  //   </div>
-  // );
+  // return <DialogBasicOne />;
+  return (
+    <div className="h-screen w-full flex items-center justify-center">
+      <DialogBasicOne />
+    </div>
+  );
 };
 
 export default Page;

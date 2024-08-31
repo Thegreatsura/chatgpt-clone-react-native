@@ -28,7 +28,7 @@ export const OrderConfirmationCardV2 = ({
       {header && (
         <CardHeader className="p-0">
           <div className="group w-40 flex items-center">
-            <div className="bg-zinc-900 h-10 w-10 mr-[2px] text-primary-foreground inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
+            <div className="bg-zinc-900 hover:scale-110 h-10 w-10 mr-[2px] text-primary-foreground inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
               <ArrowLeft className="size-6 p-0 text-gray-500 hover:text-white " />
             </div>
             <div className="flex items-center group-hover:hidden transition-all">
@@ -68,7 +68,7 @@ export const OrderConfirmationCardV2 = ({
           </div>
         </div>
 
-        <div className="space-y-2 mb-6">
+        {/* <div className="space-y-2 mb-6">
           <p className="text-gray-400">Order #: 9204417</p>
           <p className="text-gray-400">Date: 7 Aug 2024, 6:03</p>
           <p className="text-gray-400">
@@ -78,7 +78,7 @@ export const OrderConfirmationCardV2 = ({
             Email:{" "}
             <span className="bg-gray-700 rounded px-16 ml-2">&nbsp;</span>
           </p>
-        </div>
+        </div> */}
 
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
@@ -86,21 +86,21 @@ export const OrderConfirmationCardV2 = ({
               <Image src="/image.png" alt="Product" width={40} height={40} />
             </div>
             <div>
-              <p className="font-medium">The pitch deck template that</p>
+              <p className="font-medium">The pitch deck </p>
               <p className="font-medium">doesn&apos;t suck</p>
             </div>
           </div>
-          <p className="font-semibold">$59.00</p>
+          <p className="font-semibold">ETB 59.00</p>
         </div>
 
         <div className="border-t border-gray-700 pt-4 space-y-2">
           <div className="flex justify-between">
             <p className="text-gray-400">Subtotal</p>
-            <p className="font-semibold">$59.00</p>
+            <p className="font-semibold">ETB 59.00</p>
           </div>
           <div className="flex justify-between">
             <p className="font-semibold">Total</p>
-            <p className="font-semibold">$59.00</p>
+            <p className="font-semibold">ETB 59.00</p>
           </div>
         </div>
       </CardContent>

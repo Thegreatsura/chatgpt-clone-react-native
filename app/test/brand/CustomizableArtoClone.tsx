@@ -375,8 +375,8 @@ export function ArtoCloneV2(props: ArtoCloneProps) {
                           <p
                             className={`${fontSizes?.small} text-${textColor}-500`}
                           >
-                            Get Raihan Fikri's details to pay from your bank
-                            account
+                            Get Raihan Fikri&apos;s details to pay from your
+                            bank account
                           </p>
                         </div>
                       </div>
