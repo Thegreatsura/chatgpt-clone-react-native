@@ -8,7 +8,7 @@ import {
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Store } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -32,7 +32,7 @@ export const OrderConfirmationCardV2 = ({
               <ArrowLeft className="size-6 p-0 text-gray-500 hover:text-white " />
             </div>
             <div className="flex items-center group-hover:hidden transition-all">
-              <div className="bg-gray-200 p-[3px] rounded-full mr-[2px]">
+              <div className="bg-gray-200 p-[3px] rounded-full mr-[6px]">
                 <Avatar className="size-4">
                   <AvatarImage
                     src="https://github.com/shadcn.png"
@@ -53,41 +53,56 @@ export const OrderConfirmationCardV2 = ({
       )}
 
       <CardContent className="p-6">
-        {/* <div className="flex items-center mb-4">
-          <span className="text-yellow-400 text-2xl mr-2">🎉</span>
-          <h2 className="text-xl font-semibold">Woohoo! You made a sale!</h2>
-        </div> */}
+        
 
-        <div className="bg-indigo-600 rounded-xl overflow-hidden mb-6">
-          <div className="relative h-40 w-full">
+        <div className="rounded-xl overflow-hidden mb-6">
+          <div className="relative h-52 w-full">
+            <Avatar className="w-full h-full rounded-none object-contain">
+              <AvatarImage
+                className="w-full h-full rounded-none object-cover"
+                src="/shoe.jpg"
+                alt="product image"
+              />
+              <AvatarFallback className="w-full h-full rounded-none">
+                <Skeleton className="w-full h-full !bg-zinc-500 dark:bg-muted" />
+              </AvatarFallback>
+            </Avatar>
+
             {/* Replace with actual confetti animation */}
-            <div className="absolute inset-0 flex items-center justify-center">
+            {/* <div className="absolute inset-0 flex items-center justify-center">
               <span className="text-4xl">🥳</span>
-            </div>
+            </div> */}
             {/* Add confetti pattern here */}
           </div>
         </div>
 
-        {/* <div className="space-y-2 mb-6">
-          <p className="text-gray-400">Order #: 9204417</p>
-          <p className="text-gray-400">Date: 7 Aug 2024, 6:03</p>
-          <p className="text-gray-400">
-            Name: <span className="bg-gray-700 rounded px-10 ml-2">&nbsp;</span>
-          </p>
-          <p className="text-gray-400">
-            Email:{" "}
-            <span className="bg-gray-700 rounded px-16 ml-2">&nbsp;</span>
-          </p>
-        </div> */}
+      
 
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
             <div className="w-12 h-12 bg-white rounded-md mr-3 flex items-center justify-center">
-              <Image src="/image.png" alt="Product" width={40} height={40} />
+              <Avatar className="rounded-md">
+                <AvatarImage
+                  className="rounded-md"
+                  width={40}
+                  height={40}
+                  src="/shoe.jpg"
+                  alt="product image"
+                />
+                <AvatarFallback className="rounded-none">
+                  <Skeleton className="!bg-zinc-500 dark:bg-muted" />
+                </AvatarFallback>
+              </Avatar>
+
+              {/* <Image
+                className="rounded-md"
+                src="/shoe.jpg"
+                alt="Product image"
+              /> */}
             </div>
             <div>
-              <p className="font-medium">The pitch deck </p>
-              <p className="font-medium">doesn&apos;t suck</p>
+              <p className="font-medium">AirFlow Runner X2</p>
+              <p className="font-medium text-zinc-700">Futuristic Design</p>
             </div>
           </div>
           <p className="font-semibold">ETB 59.00</p>
@@ -103,6 +118,7 @@ export const OrderConfirmationCardV2 = ({
             <p className="font-semibold">ETB 59.00</p>
           </div>
         </div>
+
       </CardContent>
       {footer && (
         <CardFooter className="px-6 pb-6">

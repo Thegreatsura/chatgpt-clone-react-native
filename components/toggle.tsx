@@ -3,22 +3,20 @@
 import * as React from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
 
-export function ModeToggle() {
+type Props = {
+  className?: string
+}
+
+export function ModeToggle({className}: Props) {
   const { setTheme, theme } = useTheme();
 
   return (
     <Button
       size={"icon"}
-      className="rounded-xl"
+      className={cn("rounded-xl", className)}
       onClick={() => {
         if (theme === "dark") setTheme("light");
         if (theme === "light") setTheme("dark");

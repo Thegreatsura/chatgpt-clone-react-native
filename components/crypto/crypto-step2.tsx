@@ -110,16 +110,16 @@ export const CryptoStep2 = () => {
                 style={{
                   borderRadius: "12px",
                 }}
-                className="flex max-w-[270px] flex-col overflow-hidden border border-zinc-950/10 bg-white dark:border-zinc-50/10 dark:bg-zinc-900"
+                className="flex flex-col overflow-hidden border border-zinc-950/10 bg-white dark:border-zinc-50/10 dark:bg-zinc-900"
               >
                 <DialogBaner className="h-20 w-20">
-                  <Avatar className="h-20 w-20 rounded-lg">
+                  <Avatar className="h-20 w-20 rounded-xl">
                     <AvatarImage
-                      className="h-20 w-20"
+                      className="h-20 w-20 rounded-xl"
                       src="/image.png"
                       alt="@shadcn"
                     />
-                    <AvatarFallback className="mb-4 h-20 w-20">
+                    <AvatarFallback className="mb-4 h-20 w-20 rounded-xl">
                       <Skeleton className="mb-4 h-20 w-20 !bg-zinc-500" />
                     </AvatarFallback>
                   </Avatar>

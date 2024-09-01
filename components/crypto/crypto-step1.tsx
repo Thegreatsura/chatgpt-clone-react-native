@@ -108,13 +108,14 @@ export const CryptoStep1 = ({ next }: Props) => {
     >
       <CardContent className="flex items-center justify-center flex-col gap-4 h-[228px] bg-muted rounded-xl p-3">
         <ToggleGroup
+          variant={"outline"}
           className="flex flex-col p-3"
           onValueChange={(value) => setNetwork(value)}
           type="single"
         >
           <div className="flex gap-2">
             <ToggleGroupItem
-              className="data-[state=on]:bg-black/10 dark:data-[state=on]:bg-white/10"
+              className="data-[state=on]:bg-black/10 dark:data-[state=on]:bg-white/10 dark:border-slate-200 border-slate-900 dark:border"
               value="btc"
               aria-label="Toggle bold"
             >
@@ -122,7 +123,7 @@ export const CryptoStep1 = ({ next }: Props) => {
               ERC-20
             </ToggleGroupItem>
             <ToggleGroupItem
-              className="data-[state=on]:bg-black/10 dark:data-[state=on]:bg-white/10"
+              className="data-[state=on]:bg-black/10 dark:data-[state=on]:bg-white/10 dark:border-slate-200 border-slate-900 dark:border"
               value="eth"
               aria-label="Toggle italic"
             >
@@ -130,7 +131,7 @@ export const CryptoStep1 = ({ next }: Props) => {
               TRC-20
             </ToggleGroupItem>
             <ToggleGroupItem
-              className="data-[state=on]:bg-black/10 dark:data-[state=on]:bg-white/10"
+              className="data-[state=on]:bg-black/10 dark:data-[state=on]:bg-white/10 dark:border-slate-200 border-slate-900 dark:border"
               value="hello"
               aria-label="Toggle underline"
             >
@@ -142,7 +143,7 @@ export const CryptoStep1 = ({ next }: Props) => {
 
           <div className="flex gap-2">
             <ToggleGroupItem
-              className="data-[state=on]:bg-black/10 dark:data-[state=on]:bg-white/10"
+              className="w-[72px] data-[state=on]:bg-black/10 dark:data-[state=on]:bg-white/10 dark:border-slate-200 border-slate-900 dark:border"
               value="hihi"
               aria-label="Toggle bold"
             >
@@ -150,7 +151,7 @@ export const CryptoStep1 = ({ next }: Props) => {
               SPL
             </ToggleGroupItem>
             <ToggleGroupItem
-              className="data-[state=on]:bg-black/10 dark:data-[state=on]:bg-white/10"
+              className="data-[state=on]:bg-black/10 dark:data-[state=on]:bg-white/10 dark:border-slate-200 border-slate-900 dark:border"
               value="non"
               aria-label="Toggle italic"
             >
@@ -161,7 +162,7 @@ export const CryptoStep1 = ({ next }: Props) => {
 
           <div>
             <ToggleGroupItem
-              className="data-[state=on]:bg-black/10 dark:data-[state=on]:bg-white/10"
+              className="w-[72px] data-[state=on]:bg-black/10 dark:data-[state=on]:bg-white/10 dark:border-slate-200 border-slate-900 dark:border"
               value="chick"
               aria-label="Toggle underline"
             >
