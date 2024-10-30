@@ -36,7 +36,7 @@ export const OrderConfirmationCardV2 = ({
                 {/* bg-gray-200 */}
                 <Avatar className="size-6">
                   <AvatarImage
-                    src="access-dark-logo.svg"
+                    src="/access-dark-logo.svg"
                     alt="Logo"
                     className="h-6 w-6"
                   />

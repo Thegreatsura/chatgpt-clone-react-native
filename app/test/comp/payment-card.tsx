@@ -29,6 +29,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Info } from "@/components/payment-method";
@@ -170,9 +174,7 @@ export const PaymentCard = ({
                   }}
                 >
                   <p className="mt-2 text-zinc-500 dark:text-zinc-500">
-                    Little is known about the life of Édouard-Wilfrid Buquet. He
-                    was born in France in 1866, but the time and place of his
-                    death is unfortunately a mystery.
+                    Little is known about the access card💳.
                   </p>
                   {/* <p className="text-zinc-500">
                     Research conducted in the 1970s revealed that he’d designed
@@ -185,7 +187,7 @@ export const PaymentCard = ({
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Are.na block
+                    Access inc.
                   </a>
                 </DialogDescription>
               </div>
@@ -202,7 +204,7 @@ export const PaymentCard = ({
               <span className="font-bold">
                 {paymentMethod === "Crypto" ? "USDT" : "ETB"}
               </span>{" "}
-              118.00
+              {paymentMethod === "Crypto" ? "0.867647" : "118.00"}
             </span>
           </p>
         </div>
@@ -232,21 +234,6 @@ export const PaymentCard = ({
               Telebirr
             </Label>
           </div>
-
-          {/* <div>
-            <RadioGroupItem
-              value="Telebirr"
-              id="Telebirr"
-              className="peer sr-only"
-            />
-            <Label
-              htmlFor="Telebirr"
-              className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
-            >
-              <CBEbirr className="mb-3 h-6 w-6" />
-              CBEbirr
-            </Label>
-          </div> */}
 
           <div>
             <RadioGroupItem
@@ -290,7 +277,62 @@ export const PaymentCard = ({
             </Label>
           </div> */}
         </RadioGroup>
-        <div className="w-full flex flex-row justify-end">more</div>
+        <div className="w-full flex flex-row justify-end">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline">more</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56">
+              <RadioGroup>
+                <DropdownMenuGroup className="flex flex-row">
+                  <DropdownMenuItem>
+                    <div>
+                      <RadioGroupItem
+                        value="Telebirr"
+                        id="Telebirr"
+                        className="peer sr-only"
+                      />
+                      <Label
+                        htmlFor="Telebirr"
+                        className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+                      >
+                        <CBEbirr className="mb-3 h-6 w-6" />
+                        CBEbirr
+                      </Label>
+                    </div>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <div>
+                      <RadioGroupItem
+                        value="Telebirr"
+                        id="Telebirr"
+                        className="peer sr-only w-20"
+                      />
+                      <Label
+                        htmlFor="Telebirr"
+                        className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+                      >
+                        {/* cbe.svg */}
+                        <Avatar className="size-6 mb-3">
+                          <AvatarImage
+                            src="/cbe.svg"
+                            alt="Logo"
+                            className="h-6 w-6"
+                          />
+                          <AvatarFallback>
+                            <Skeleton className="h-6 w-6 !bg-zinc-500" />
+                          </AvatarFallback>
+                        </Avatar>
+                        {/* <CBEbirr className="mb-3 h-6 w-6" /> */}
+                        CBE
+                      </Label>
+                    </div>
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+              </RadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
         <Paymentsteps
           className="mt-4"
           loading={loading}

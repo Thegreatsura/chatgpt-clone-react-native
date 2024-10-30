@@ -8,6 +8,7 @@
 
 # testing
 /coverage
+expo-env.d
 
 # next.js
 /.next/
