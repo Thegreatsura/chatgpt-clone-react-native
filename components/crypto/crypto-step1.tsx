@@ -116,58 +116,11 @@ export const CryptoStep1 = ({ next }: Props) => {
           <div className="flex gap-2">
             <ToggleGroupItem
               className="data-[state=on]:bg-black/10 dark:data-[state=on]:bg-white/10 dark:border-slate-200 border-slate-900 dark:border"
-              value="btc"
-              aria-label="Toggle bold"
-            >
-              {/* Ethereum  */}
-              ERC-20
-            </ToggleGroupItem>
-            <ToggleGroupItem
-              className="data-[state=on]:bg-black/10 dark:data-[state=on]:bg-white/10 dark:border-slate-200 border-slate-900 dark:border"
               value="eth"
               aria-label="Toggle italic"
             >
               {/* Tron  */}
               TRC-20
-            </ToggleGroupItem>
-            <ToggleGroupItem
-              className="data-[state=on]:bg-black/10 dark:data-[state=on]:bg-white/10 dark:border-slate-200 border-slate-900 dark:border"
-              value="hello"
-              aria-label="Toggle underline"
-            >
-              {/* <span className="hidden sm:block">Binance Smart Chain</span>{" "} */}
-              BEP-20
-              {/* or BSC */}
-            </ToggleGroupItem>
-          </div>
-
-          <div className="flex gap-2">
-            <ToggleGroupItem
-              className="w-[72px] data-[state=on]:bg-black/10 dark:data-[state=on]:bg-white/10 dark:border-slate-200 border-slate-900 dark:border"
-              value="hihi"
-              aria-label="Toggle bold"
-            >
-              {/* Solana  */}
-              SPL
-            </ToggleGroupItem>
-            <ToggleGroupItem
-              className="data-[state=on]:bg-black/10 dark:data-[state=on]:bg-white/10 dark:border-slate-200 border-slate-900 dark:border"
-              value="non"
-              aria-label="Toggle italic"
-            >
-              {/* Polygon  */}
-              MATIC
-            </ToggleGroupItem>
-          </div>
-
-          <div>
-            <ToggleGroupItem
-              className="w-[72px] data-[state=on]:bg-black/10 dark:data-[state=on]:bg-white/10 dark:border-slate-200 border-slate-900 dark:border"
-              value="chick"
-              aria-label="Toggle underline"
-            >
-              {/* Algorand  */}
-              ALGO
             </ToggleGroupItem>
           </div>
         </ToggleGroup>

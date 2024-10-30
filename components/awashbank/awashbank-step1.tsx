@@ -54,7 +54,7 @@ export const AwashBankStep1 = () => {
                 variant={"outline"}
                 className="flex justify-start md:w-full h-10 px-2 py-2"
               >
-                <p className="truncate">Surafel gudisa</p>
+                <p className="truncate">Merchant name</p>
               </Button>
             </div>
             <div className="grid gap-2 relative">
@@ -68,7 +68,7 @@ export const AwashBankStep1 = () => {
                 variant={"outline"}
                 className="flex justify-start md:w-full h-10 px-2 py-2"
               >
-                <p className="truncate">013351299415300</p>
+                <p className="truncate">Merchant account Number</p>
               </Button>
             </div>
             <div className="grid gap-2 relative">
@@ -85,8 +85,8 @@ export const AwashBankStep1 = () => {
                 )}
               >
                 <div>
-                  168.72
-                  <span className="text-xs font-bold ml-1">Br</span>
+                  118.00
+                  <span className="font-bold ml-1">ETB</span>
                 </div>
               </span>
             </div>

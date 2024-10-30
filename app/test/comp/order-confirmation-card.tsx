@@ -33,19 +33,20 @@ export const OrderConfirmationCardV2 = ({
             </div>
             <div className="flex items-center group-hover:hidden transition-all">
               <div className="bg-gray-200 p-[3px] rounded-full mr-[6px]">
-                <Avatar className="size-4">
+                {/* bg-gray-200 */}
+                <Avatar className="size-6">
                   <AvatarImage
-                    src="https://github.com/shadcn.png"
-                    alt="@shadcn"
+                    src="access-dark-logo.svg"
+                    alt="Logo"
                     className="h-6 w-6"
                   />
                   <AvatarFallback>
                     <Skeleton className="h-6 w-6 !bg-zinc-500" />
                   </AvatarFallback>
                 </Avatar>
+                {/* <Store className="size-6 mr-[2px] rounded-lg" /> */}
               </div>
-              {/* <Store className="size-4 mr-[2px] rounded-lg" /> */}
-              surapay
+              Access
             </div>
             <p className="hidden group-hover:block transition-all">back</p>
           </div>
@@ -53,14 +54,12 @@ export const OrderConfirmationCardV2 = ({
       )}
 
       <CardContent className="p-6">
-        
-
         <div className="rounded-xl overflow-hidden mb-6">
           <div className="relative h-52 w-full">
             <Avatar className="w-full h-full rounded-none object-contain">
               <AvatarImage
                 className="w-full h-full rounded-none object-cover"
-                src="/shoe.jpg"
+                src="/access-dark-logo.svg"
                 alt="product image"
               />
               <AvatarFallback className="w-full h-full rounded-none">
@@ -76,8 +75,6 @@ export const OrderConfirmationCardV2 = ({
           </div>
         </div>
 
-      
-
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
             <div className="w-12 h-12 bg-white rounded-md mr-3 flex items-center justify-center">
@@ -86,7 +83,7 @@ export const OrderConfirmationCardV2 = ({
                   className="rounded-md"
                   width={40}
                   height={40}
-                  src="/shoe.jpg"
+                  src="/access-dark-logo.svg"
                   alt="product image"
                 />
                 <AvatarFallback className="rounded-none">
@@ -101,8 +98,37 @@ export const OrderConfirmationCardV2 = ({
               /> */}
             </div>
             <div>
-              <p className="font-medium">AirFlow Runner X2</p>
-              <p className="font-medium text-zinc-700">Futuristic Design</p>
+              <p className="font-medium">Access card</p>
+              <p className="font-medium text-zinc-700">Master or Vista card</p>
+            </div>
+          </div>
+          <p className="font-semibold">ETB 59.00</p>
+        </div>
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center">
+            <div className="w-12 h-12 bg-white rounded-md mr-3 flex items-center justify-center">
+              <Avatar className="rounded-md">
+                <AvatarImage
+                  className="rounded-md"
+                  width={40}
+                  height={40}
+                  src="/access-dark-logo.svg"
+                  alt="product image"
+                />
+                <AvatarFallback className="rounded-none">
+                  <Skeleton className="!bg-zinc-500 dark:bg-muted" />
+                </AvatarFallback>
+              </Avatar>
+
+              {/* <Image
+                className="rounded-md"
+                src="/shoe.jpg"
+                alt="Product image"
+              /> */}
+            </div>
+            <div>
+              <p className="font-medium">Access card</p>
+              <p className="font-medium text-zinc-700">Master or Visa card</p>
             </div>
           </div>
           <p className="font-semibold">ETB 59.00</p>
@@ -111,14 +137,13 @@ export const OrderConfirmationCardV2 = ({
         <div className="border-t border-gray-700 pt-4 space-y-2">
           <div className="flex justify-between">
             <p className="text-gray-400">Subtotal</p>
-            <p className="font-semibold">ETB 59.00</p>
+            <p className="font-semibold">ETB 118.00</p>
           </div>
           <div className="flex justify-between">
             <p className="font-semibold">Total</p>
-            <p className="font-semibold">ETB 59.00</p>
+            <p className="font-semibold">ETB 118.00</p>
           </div>
         </div>
-
       </CardContent>
       {footer && (
         <CardFooter className="px-6 pb-6">

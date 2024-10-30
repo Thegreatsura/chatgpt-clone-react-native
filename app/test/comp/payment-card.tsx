@@ -35,7 +35,13 @@ import { Info } from "@/components/payment-method";
 import { FadeText } from "@/components/magicui/fade-text";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { Telebirr, Awashbank, Crypto, USDT } from "@/components/payment/icons";
+import {
+  Telebirr,
+  Awashbank,
+  Crypto,
+  USDT,
+  CBEbirr,
+} from "@/components/payment/icons";
 import Paymentsteps from "@/components/payment-steps";
 import Link from "next/link";
 import { SelectBank } from "@/components/select-bank";
@@ -79,19 +85,19 @@ export const PaymentCard = ({
             </div>
 
             <div className="bg-gray-200 p-1 rounded-full">
-              <Avatar className="size-6 hover:cursor-pointer">
+              <Avatar className="size-8 hover:cursor-pointer">
                 <AvatarImage
-                  src="https://github.com/shadcn.png"
+                  src="access-dark-logo.svg"
                   alt="@shadcn"
-                  className="size-6"
+                  className="size-8"
                 />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
             </div>
-            <span className="text-gray-500 text-sm">SuraPay</span>
+            <span className="text-gray-500 text-md">Access</span>
             <div className="flex-1" />
           </div>
-          <ModeToggle />
+          {/* <ModeToggle /> */}
         </div>
       </CardHeader>
 
@@ -114,7 +120,7 @@ export const PaymentCard = ({
                 <div className="relative rounded-xl h-36 w-40">
                   <Avatar className="h-36 w-40 rounded-xl">
                     <AvatarImage
-                      src="/shoe.jpg"
+                      src="/access-dark-logo.svg"
                       alt="@shadcn"
                       className="h-36 w-40"
                     />
@@ -144,16 +150,16 @@ export const PaymentCard = ({
               </DialogBaner> */}
 
               <DialogImage
-                src="/shoe.jpg"
+                src="/access-dark-logo.svg"
                 alt="A desk lamp designed by Edouard Wilfrid Buquet in 1925. It features a double-arm design and is made from nickel-plated brass, aluminium and varnished wood."
                 className="h-full w-full md:h-64"
               />
               <div className="p-6 overflow-y-scoll">
                 <DialogTitle className="text-2xl text-zinc-950 dark:text-zinc-50">
-                  AirFlow Runner X2
+                  Access card
                 </DialogTitle>
                 <DialogSubtitle className="text-zinc-700 dark:text-zinc-400">
-                  Futuristic Design
+                  Master or Visa Card
                 </DialogSubtitle>
                 <DialogDescription
                   disableLayoutAnimation
@@ -187,23 +193,20 @@ export const PaymentCard = ({
             </DialogContent>
           </DialogContainer>
         </Dialog>
-
         <div className="space-y-2 mb-6 flex flex-col lg:hidden">
           <p className="w-full text-center">
-            <span className="px-10 ml-2">AirFlow Runner X2</span>
+            <span className="px-10 ml-2">Access card</span>
           </p>
           <p className="w-full text-center">
             <span className="p-2">
               <span className="font-bold">
                 {paymentMethod === "Crypto" ? "USDT" : "ETB"}
               </span>{" "}
-              120.00
+              118.00
             </span>
           </p>
         </div>
-
         <div className="flex items-center justify-center mb-3 mt-0 p-0"></div>
-
         <CardTitle>Pay with {paymentMethod} </CardTitle>
         <CardDescription className="mb-3">
           Pay with your choice of payment service.
@@ -229,6 +232,21 @@ export const PaymentCard = ({
               Telebirr
             </Label>
           </div>
+
+          {/* <div>
+            <RadioGroupItem
+              value="Telebirr"
+              id="Telebirr"
+              className="peer sr-only"
+            />
+            <Label
+              htmlFor="Telebirr"
+              className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+            >
+              <CBEbirr className="mb-3 h-6 w-6" />
+              CBEbirr
+            </Label>
+          </div> */}
 
           <div>
             <RadioGroupItem
@@ -272,7 +290,7 @@ export const PaymentCard = ({
             </Label>
           </div> */}
         </RadioGroup>
-
+        <div className="w-full flex flex-row justify-end">more</div>
         <Paymentsteps
           className="mt-4"
           loading={loading}
