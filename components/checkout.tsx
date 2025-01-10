@@ -1,5 +1,6 @@
 import React from "react";
 import { CheckBox } from "./comp-147";
+import { AddEmail } from "./comp-156";
 
 const Checkout = () => {
   return (
@@ -10,8 +11,9 @@ const Checkout = () => {
           <div>$120.76</div>
         </div>
       </div>
-      <div className="h-[70%] flex flex-col items-center justify-center">
-        <CheckBox />
+      <div className="h-[70%] flex flex-col items-center justify-center bg-white">
+        {/* <CheckBox /> */}
+        <AddEmail />
       </div>
     </div>
   );
