@@ -11,6 +11,7 @@ import {
 import { useEffect, useId, useRef, useState } from "react";
 import { Button } from "./ui/button";
 import { CircleHelp } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export function AddEmail() {
   const radioId = useId();
@@ -26,13 +27,19 @@ export function AddEmail() {
 
   return (
     <RadioGroup
-      className="gap-6 mt-2"
+      className="gap-6 mt-2 border p-2 rounded-none"
       value={selectedValue}
       onValueChange={setSelectedValue}
     >
       <div>
         <div className="flex items-start gap-2">
           <RadioGroupItemCustom
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedValue((prev) =>
+                prev === "with-expansion" ? "" : "with-expansion"
+              );
+            }}
             value="with-expansion"
             id={`${radioId}-1`}
             aria-describedby={`${radioId}-1-description`}
@@ -41,7 +48,7 @@ export function AddEmail() {
           <div className="grow">
             <div className="grid grow gap-2">
               <Label htmlFor={`${radioId}-1`} className="flex">
-                Email for Notification {"(Optional)"}
+                Add email for Notification {"(Optional)"}
                 <span>
                   <CircleHelp size={15} className="ml-1 hover:cursor-pointer" />
                 </span>
@@ -63,32 +70,54 @@ export function AddEmail() {
                 selectedValue === "with-expansion" ? "expanded" : "collapsed"
               }
             >
-              <div className="pointer-events-none -m-2 overflow-hidden p-2">
+              <div
+                className={cn(
+                  "pointer-events-none -m-2 overflow-hidden p-2 hidden",
+                  {
+                    "block ": selectedValue === "with-expansion",
+                  }
+                )}
+              >
                 <div className="pointer-events-auto mt-3">
                   <Input
+                    id="radio-05-additional-info"
                     ref={inputRef}
                     type="text"
-                    id="radio-05-additional-info"
+                    className="rounded-none"
                     placeholder="Enter your email"
                     aria-label="Additional Information"
                     disabled={selectedValue !== "with-expansion"}
                   />
                 </div>
               </div>
-              <div className="pointer-events-none -m-2 overflow-hidden p-2">
+              <div
+                className={cn(
+                  "pointer-events-none -m-2 overflow-hidden p-2 hidden",
+                  {
+                    "block ": selectedValue === "with-expansion",
+                  }
+                )}
+              >
                 <div className="pointer-events-auto mt-3">
                   <Input
-                    type="text"
                     id="radio-06-additional-info"
+                    type="text"
+                    className="rounded-none"
                     placeholder="Enter your phone number"
                     aria-label="Additional Information"
                     disabled={selectedValue !== "with-expansion"}
                   />
                 </div>
               </div>
-              <Button className="mt-2" onClick={() => setSelectedValue("")}>
+
+              {/* <Button
+                className={cn("mt-2 hidden", {
+                  "block ": selectedValue === "with-expansion",
+                })}
+                onClick={() => setSelectedValue("")}
+              >
                 hide
-              </Button>
+              </Button> */}
             </div>
           </div>
         </div>
