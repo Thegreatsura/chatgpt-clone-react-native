@@ -6,8 +6,24 @@ import { defineStepper } from "@stepperize/react";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { ArrowLeft, Upload } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { CheckOutItems, Items } from "./checkout-items";
 import { Input } from "./ui/input";
+
+function extractSpecificDomainUrls(text: string): string | undefined {
+  // Regular expression to match URLs starting with the specific domain
+  const AwashUrlRegex =
+    /https:\/\/awashpay\.awashbank\.com(:\d+)?[\/\w\-?=&%.]*/gi;
+  const CBEUrlRegex = /https:\/\/apps\.cbe\.com\.et(:\d+)?[\/\w\-?=&%.]*/gi;
+  const refRegex = /Ref:\s([^\s]+)/g;
+
+  // Extract all matches
+  const matches = text.match(refRegex);
+  // console.log(matches);
+
+  // Return matche or undefined if no URLs are found
+  return matches ? matches[0].replace(".Contact", "") : undefined;
+}
 
 const { Scoped, useStepper, steps } = defineStepper(
   { id: "a", title: "Step 1", description: "checkout details" },
@@ -17,52 +33,115 @@ const { Scoped, useStepper, steps } = defineStepper(
   { id: "e", title: "Step 3", description: "final" }
 );
 
+interface CheckoutItem {
+  name: string;
+  price: number;
+  quantity: number;
+}
+
+const dummyItems: CheckoutItem[] = [
+  { name: "T-Shirt", price: 19.99, quantity: 2 },
+  { name: "Jeans", price: 49.99, quantity: 1 },
+  { name: "Sneakers", price: 79.99, quantity: 1 },
+];
+
 const Checkout = () => {
+  const [message, setMessage] = useState("");
   const [isDragging, setIsDragging] = useState(false);
   const [select, onSelect] = useState<string>("hi");
   const stepper = useStepper();
 
+  const totalItems = dummyItems.reduce((sum, item) => sum + item.quantity, 0);
+  const subtotal = dummyItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+  const tax = subtotal * 0.1; // Assuming 10% tax
+  const total = subtotal + tax;
+
   return (
     <div className="h-screen flex flex-col">
-      {!stepper.isLast && (
-        <div className="h-[40%] bg-gray-100">
-          <div className="h-full flex flex-col items-center justify-center">
-            Total
-            <div>$120.76</div>
-          </div>
-        </div>
-      )}
+      {/* <AnimatePresence>
+        {!stepper.isLast && (
+          <motion.div className={cn("h-[30vh] bg-gray-100")}>
+            <div className="h-full flex flex-col items-center justify-center">
+              Total
+              <div>$120.76</div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence> */}
 
       <div
         className={cn(
-          "h-auto flex flex-col items-center justify-center bg-white",
-          {
-            "h-[100%]": stepper.isLast,
-          }
+          "h-[70vh] flex flex-col items-center bg-white"
+          // {
+          //   "h-[100vh]": stepper.isLast,
+          // }
         )}
       >
-        {/* <CheckBox /> */}
-        <>
+        {/* <>
           {stepper.switch({
             a: (step) => (
-              <div className="w-full h-full p-6">
-                <p>{step.description}</p>
-                <AddEmail />
+              <div className="w-full my-auto px-6">
+                <div className="flex-grow h-full items-center">
+                  <div className="flex items-center mb-4 bg-gray-50 rounded-lg p-2">
+                    <div className="w-20 h-20 relative mr-4">
+                      <Image
+                        unoptimized
+                        src={"/logan-weaver-lgnwvr-RFljoc6515Y-unsplash.jpg"}
+                        alt={""}
+                        layout="fill"
+                        objectFit="cover"
+                        className="rounded-md"
+                      />
+                    </div>
+                    <div className="flex-grow">
+                      <h3 className="font-semibold">{"Nike"}</h3>
+                      <p className="text-sm text-gray-600">Qty: {2}</p>
+                      <p className="font-medium">${(100).toFixed(2)}</p>
+                    </div>
+                  </div>
+                  {dummyItems.map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex justify-between items-center mb-2"
+                    >
+                      <span>
+                        {item.name} x{item.quantity}
+                      </span>
+                      <span>${(item.price * item.quantity).toFixed(2)}</span>
+                    </div>
+                  ))}
+                  <div className="mt-4 pt-2 border-t">
+                    <div className="flex justify-between items-center mb-1">
+                      <span>Subtotal</span>
+                      <span>${subtotal.toFixed(2)}</span>
+                    </div>
+                    <div className="flex justify-between items-center mb-1">
+                      <span>Tax</span>
+                      <span>${tax.toFixed(2)}</span>
+                    </div>
+                    <div className="flex justify-between items-center font-bold">
+                      <span>Total</span>
+                      <span>${total.toFixed(2)}</span>
+                    </div>
+                  </div>
+                </div>
                 <Button
-                  className="w-full mt-4 rounded-none"
+                  className="w-full rounded-none"
                   onClick={() => stepper.next()}
                 >
-                  continue
+                  Proceed to Payment
                 </Button>
               </div>
             ),
             b: (step) => (
-              <div className="w-full h-full p-6 flex flex-col justify-center">
-                <p>{step.description}</p>
-                <Items selected={select} onSelect={onSelect} />
+              <div className="w-full h-full px-6 flex flex-col mt-4">
+                <Items selected={select} onSelect={onSelect} className="mb-2" />
                 <Button
                   disabled={select.trim() === "hi"}
-                  className="w-full mt-4 rounded-none"
+                  className="w-full rounded-none"
                   onClick={() => {
                     stepper.next();
                     onSelect("hi");
@@ -75,7 +154,6 @@ const Checkout = () => {
             c: (step) => (
               <div className="w-full h-full p-6">
                 <p>{step.description}</p>
-                {/* <AddEmail /> */}
                 <I />
                 <I />
                 <I />
@@ -91,19 +169,17 @@ const Checkout = () => {
               <div className="w-full h-full p-6">
                 <p>{step.description}</p>
                 <AddEmail />
-                <Input
-                  type="text"
-                  className="rounded-none mt-4"
-                  placeholder="receipt number"
-                  aria-label="Additional Information"
-                />
 
-                <Textarea rows={1} className="mt-4" />
+                <Textarea
+                  onChange={(e) => setMessage(e.target.value)}
+                  rows={7}
+                  className="mt-4"
+                />
 
                 <div
                   className={cn(
-                    "relative group cursor-pointer mt-4 mb-1",
-                    "rounded-lg border-2 border-dashed",
+                    "relative group cursor-pointer mt-6 mb-1",
+                    "rounded-none border-2 border-dashed",
                     "transition-colors duration-200",
                     isDragging
                       ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10"
@@ -125,7 +201,10 @@ const Checkout = () => {
                 </div>
                 <Button
                   className="w-full mt-4 rounded-none"
-                  onClick={() => stepper.next()}
+                  onClick={() => {
+                    console.log(extractSpecificDomainUrls(message));
+                    stepper.next();
+                  }}
                 >
                   continue
                 </Button>
@@ -145,7 +224,7 @@ const Checkout = () => {
               </div>
             ),
           })}
-        </>
+        </> */}
       </div>
     </div>
   );
@@ -163,6 +242,7 @@ import {
 import { Check, Copy } from "lucide-react";
 import { useId, useRef } from "react";
 import { Textarea } from "./ui/textarea";
+import Image from "next/image";
 
 export function I() {
   const id = useId();

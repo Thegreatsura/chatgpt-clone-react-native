@@ -47,13 +47,19 @@ export function CheckOutItems({ className }: { className?: string }) {
 
 export function Items({
   onSelect,
+  className,
 }: {
+  className?: string;
   selected: string | null;
   onSelect: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const id = useId();
   return (
-    <RadioGroup onValueChange={onSelect} className="gap-2" defaultValue="">
+    <RadioGroup
+      onValueChange={onSelect}
+      className={cn("gap-2", className)}
+      defaultValue=""
+    >
       {/* Radio card #1 */}
       <div className="relative flex w-full items-start gap-2 rounded-lg border border-input p-4 shadow-sm shadow-black/5 has-[[data-state=checked]]:border-ring">
         <RadioGroupItem
