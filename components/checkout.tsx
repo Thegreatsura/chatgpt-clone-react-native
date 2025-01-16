@@ -5,10 +5,11 @@ import { AddEmail } from "./comp-156";
 import { defineStepper } from "@stepperize/react";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
-import { ArrowLeft, Upload } from "lucide-react";
+import { ArrowLeft, Sparkles, Trash, Upload } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckOutItems, Items } from "./checkout-items";
 import { Input } from "./ui/input";
+import { type Accept, useDropzone } from "react-dropzone";
 
 function extractSpecificDomainUrls(text: string): string | undefined {
   // Regular expression to match URLs starting with the specific domain
@@ -48,7 +49,9 @@ const dummyItems: CheckoutItem[] = [
 const Checkout = () => {
   const [message, setMessage] = useState("");
   const [isDragging, setIsDragging] = useState(false);
+  const [Url, setUrl] = useState<string | null>(null);
   const [select, onSelect] = useState<string>("hi");
+  const { edgestore } = useEdgeStore();
   const stepper = useStepper();
 
   const totalItems = dummyItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -59,82 +62,116 @@ const Checkout = () => {
   const tax = subtotal * 0.1; // Assuming 10% tax
   const total = subtotal + tax;
 
+  const onDrop = React.useCallback(async (acceptedFiles: File[]) => {
+    if (acceptedFiles.length > 0) {
+      console.log(acceptedFiles);
+      const file = acceptedFiles[0];
+      const res = await edgestore.publicFiles.upload({
+        file,
+        onProgressChange: (progress) => {
+          // you can use this to show a progress bar
+          console.log(progress);
+        },
+        options: {
+          temporary: true,
+        },
+      });
+      // you can run some server action or api here
+      // to add the necessary data to your database
+      console.log(res);
+      setUrl(res.url);
+    }
+  }, []);
+
+  const accept: Accept = {
+    "image/*": [".jpg", ".jpeg", ".png"],
+  };
+
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept,
+    maxFiles: 1,
+  });
+
   return (
     <div className="h-screen flex flex-col">
-      {/* <AnimatePresence>
+      <AnimatePresence>
         {!stepper.isLast && (
-          <motion.div className={cn("h-[30vh] bg-gray-100")}>
+          <motion.div
+            className={cn("h-[40%] bg-gray-100", {
+              "h-[50%]": stepper.isFirst,
+            })}
+          >
             <div className="h-full flex flex-col items-center justify-center">
               Total
               <div>$120.76</div>
             </div>
           </motion.div>
         )}
-      </AnimatePresence> */}
+      </AnimatePresence>
 
       <div
-        className={cn(
-          "h-[70vh] flex flex-col items-center bg-white"
-          // {
-          //   "h-[100vh]": stepper.isLast,
-          // }
-        )}
+        className={cn("h-[60%] flex flex-col items-center bg-white", {
+          "h-[100vh]": stepper.isLast,
+          "h-[50%]": stepper.isFirst,
+        })}
       >
-        {/* <>
+        <>
           {stepper.switch({
             a: (step) => (
-              <div className="w-full my-auto px-6">
-                <div className="flex-grow h-full items-center">
-                  <div className="flex items-center mb-4 bg-gray-50 rounded-lg p-2">
-                    <div className="w-20 h-20 relative mr-4">
-                      <Image
-                        unoptimized
-                        src={"/logan-weaver-lgnwvr-RFljoc6515Y-unsplash.jpg"}
-                        alt={""}
-                        layout="fill"
-                        objectFit="cover"
-                        className="rounded-md"
-                      />
-                    </div>
-                    <div className="flex-grow">
-                      <h3 className="font-semibold">{"Nike"}</h3>
-                      <p className="text-sm text-gray-600">Qty: {2}</p>
-                      <p className="font-medium">${(100).toFixed(2)}</p>
-                    </div>
-                  </div>
-                  {dummyItems.map((item, index) => (
-                    <div
-                      key={index}
-                      className="flex justify-between items-center mb-2"
-                    >
-                      <span>
-                        {item.name} x{item.quantity}
-                      </span>
-                      <span>${(item.price * item.quantity).toFixed(2)}</span>
-                    </div>
-                  ))}
-                  <div className="mt-4 pt-2 border-t">
-                    <div className="flex justify-between items-center mb-1">
-                      <span>Subtotal</span>
-                      <span>${subtotal.toFixed(2)}</span>
-                    </div>
-                    <div className="flex justify-between items-center mb-1">
-                      <span>Tax</span>
-                      <span>${tax.toFixed(2)}</span>
-                    </div>
-                    <div className="flex justify-between items-center font-bold">
-                      <span>Total</span>
-                      <span>${total.toFixed(2)}</span>
-                    </div>
-                  </div>
-                </div>
-                <Button
-                  className="w-full rounded-none"
-                  onClick={() => stepper.next()}
-                >
-                  Proceed to Payment
-                </Button>
-              </div>
+              // <div className="w-full my-auto px-6">
+              //   <div className="flex-grow h-full items-center">
+              //     <div className="flex items-center mb-4 bg-gray-50 rounded-lg p-2">
+              //       <div className="w-20 h-20 relative mr-4">
+              //         <Image
+              //           unoptimized
+              //           src={"/logan-weaver-lgnwvr-RFljoc6515Y-unsplash.jpg"}
+              //           alt={""}
+              //           layout="fill"
+              //           objectFit="cover"
+              //           className="rounded-md"
+              //         />
+              //       </div>
+              //       <div className="flex-grow">
+              //         <h3 className="font-semibold">{"Nike"}</h3>
+              //         <p className="text-sm text-gray-600">Qty: {2}</p>
+              //         <p className="font-medium">${(100).toFixed(2)}</p>
+              //       </div>
+              //     </div>
+              //     {dummyItems.map((item, index) => (
+              //       <div
+              //         key={index}
+              //         className="flex justify-between items-center mb-2"
+              //       >
+              //         <span>
+              //           {item.name} x{item.quantity}
+              //         </span>
+              //         <span>${(item.price * item.quantity).toFixed(2)}</span>
+              //       </div>
+              //     ))}
+              //     <div className="mt-4 pt-2 border-t">
+              //       <div className="flex justify-between items-center mb-1">
+              //         <span>Subtotal</span>
+              //         <span>${subtotal.toFixed(2)}</span>
+              //       </div>
+              //       <div className="flex justify-between items-center mb-1">
+              //         <span>Tax</span>
+              //         <span>${tax.toFixed(2)}</span>
+              //       </div>
+              //       <div className="flex justify-between items-center font-bold">
+              //         <span>Total</span>
+              //         <span>${total.toFixed(2)}</span>
+              //       </div>
+              //     </div>
+              //   </div>
+              //   <Button
+              //     className="w-full rounded-none"
+              //     onClick={() => stepper.next()}
+              //   >
+              //     Proceed to Payment
+              //   </Button>
+              // </div>
+              <Card09 onCheckout={() => stepper.next()} />
             ),
             b: (step) => (
               <div className="w-full h-full px-6 flex flex-col mt-4">
@@ -177,8 +214,9 @@ const Checkout = () => {
                 />
 
                 <div
+                  {...getRootProps()}
                   className={cn(
-                    "relative group cursor-pointer mt-6 mb-1",
+                    "relative group h-[100px] cursor-pointer mt-6 mb-1 flex flex-col items-center justify-center",
                     "rounded-none border-2 border-dashed",
                     "transition-colors duration-200",
                     isDragging
@@ -192,13 +230,44 @@ const Checkout = () => {
                   onDragLeave={() => setIsDragging(false)}
                   aria-label="Upload file"
                 >
-                  <div className="flex flex-col items-center mt-2">
-                    <Upload className="w-8 h-8 text-zinc-400 dark:text-zinc-500" />
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                      Drag and drop or click to upload
-                    </p>
+                  <input {...getInputProps()} />
+                  <div className="flex flex-col items-center">
+                    {Url ? (
+                      <div className="flex items-center justify-center gap-6">
+                        <Avatar className="h-24 w-24 rounded-none border-dashed border-2 border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
+                          <AvatarImage
+                            src={Url}
+                            className=" rounded-none object-contain"
+                          />
+                          <AvatarFallback className="bg-zinc-100 dark:bg-zinc-900">
+                            SC
+                          </AvatarFallback>
+                        </Avatar>
+                        <Button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setUrl(null);
+                          }}
+                          variant="outline"
+                          size={"icon"}
+                          className="rounded-none 
+                              hover:bg-zinc-50 dark:hover:bg-zinc-900/50
+                             transition-colors shadow-sm"
+                        >
+                          <Trash className="h-6 w-6 text-red-600 dark:text-zinc-400" />
+                        </Button>
+                      </div>
+                    ) : (
+                      <>
+                        <Upload className="w-8 h-8 text-zinc-400 dark:text-zinc-500" />
+                        <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                          Drag and drop or click to upload
+                        </p>
+                      </>
+                    )}
                   </div>
                 </div>
+
                 <Button
                   className="w-full mt-4 rounded-none"
                   onClick={() => {
@@ -224,7 +293,7 @@ const Checkout = () => {
               </div>
             ),
           })}
-        </> */}
+        </>
       </div>
     </div>
   );
@@ -243,6 +312,9 @@ import { Check, Copy } from "lucide-react";
 import { useId, useRef } from "react";
 import { Textarea } from "./ui/textarea";
 import Image from "next/image";
+import { useEdgeStore } from "@/lib/edgestore";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Card09 } from "./kokonutui/card-09";
 
 export function I() {
   const id = useId();
