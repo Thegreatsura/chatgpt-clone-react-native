@@ -50,6 +50,7 @@ const Checkout = () => {
   const [message, setMessage] = useState("");
   const [isDragging, setIsDragging] = useState(false);
   const [Url, setUrl] = useState<string | null>(null);
+  const [progress, setProgress] = useState<number | null>(null);
   const [select, onSelect] = useState<string>("hi");
   const { edgestore } = useEdgeStore();
   const stepper = useStepper();
@@ -71,6 +72,7 @@ const Checkout = () => {
         onProgressChange: (progress) => {
           // you can use this to show a progress bar
           console.log(progress);
+          setProgress(progress);
         },
         options: {
           temporary: true,
@@ -234,18 +236,19 @@ const Checkout = () => {
                   <div className="flex flex-col items-center">
                     {Url ? (
                       <div className="flex items-center justify-center gap-6">
-                        <Avatar className="h-24 w-24 rounded-none border-dashed border-2 border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
+                        <Avatar className="h-24 w-24 rounded-none border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
                           <AvatarImage
                             src={Url}
-                            className=" rounded-none object-contain"
+                            className="rounded-none object-contain"
                           />
-                          <AvatarFallback className="bg-zinc-100 dark:bg-zinc-900">
-                            SC
+                          <AvatarFallback className="bg-zinc-100 dark:bg-zinc-900 rounded-none">
+                            loading
                           </AvatarFallback>
                         </Avatar>
                         <Button
                           onClick={(e) => {
                             e.stopPropagation();
+                            setProgress(null);
                             setUrl(null);
                           }}
                           variant="outline"
@@ -259,7 +262,12 @@ const Checkout = () => {
                       </div>
                     ) : (
                       <>
-                        <Upload className="w-8 h-8 text-zinc-400 dark:text-zinc-500" />
+                        {progress !== null ? (
+                          <Progress value={progress!} />
+                        ) : (
+                          <Upload className="w-8 h-8 text-zinc-400 dark:text-zinc-500" />
+                        )}
+
                         <p className="text-sm text-zinc-600 dark:text-zinc-400">
                           Drag and drop or click to upload
                         </p>
@@ -315,6 +323,7 @@ import Image from "next/image";
 import { useEdgeStore } from "@/lib/edgestore";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Card09 } from "./kokonutui/card-09";
+import { Progress } from "./comp-254";
 
 export function I() {
   const id = useId();

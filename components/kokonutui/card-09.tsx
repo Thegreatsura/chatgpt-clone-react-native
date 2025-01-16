@@ -57,7 +57,7 @@ export function Card09({
     <div
       className={cn(
         "w-full max-w-[400px]",
-        "rounded-2xl",
+        "rounded-none",
         "bg-white dark:bg-zinc-900",
         "border border-zinc-200 dark:border-zinc-800",
         "shadow-sm"
