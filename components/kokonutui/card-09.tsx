@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import { ArrowUpRight } from "lucide-react";
 import { Button } from "../ui/button";
 
 interface Card09Props {

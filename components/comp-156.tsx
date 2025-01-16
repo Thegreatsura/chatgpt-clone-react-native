@@ -3,15 +3,10 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-import {
-  RadioGroup,
-  RadioGroupItem,
-  RadioGroupItemCustom,
-} from "@/components/ui/radio-group";
-import { useEffect, useId, useRef, useState } from "react";
-import { Button } from "./ui/button";
-import { CircleHelp } from "lucide-react";
+import { RadioGroup, RadioGroupItemCustom } from "@/components/ui/radio-group";
 import { cn } from "@/lib/utils";
+import { CircleHelp } from "lucide-react";
+import { useEffect, useId, useRef, useState } from "react";
 
 export function AddEmail({ className }: { className?: string }) {
   const radioId = useId();

@@ -1,14 +1,4 @@
 "use client";
-import React, { useState } from "react";
-import { CheckBox } from "./comp-147";
-import { AddEmail } from "./comp-156";
-import { defineStepper } from "@stepperize/react";
-import { Button } from "./ui/button";
-import { cn } from "@/lib/utils";
-import { ArrowLeft, Sparkles, Trash, Upload } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { CheckOutItems, Items } from "./checkout-items";
-import { Input } from "./ui/input";
 import { Label } from "@/components/ui/label";
 import {
   Tooltip,
@@ -16,16 +6,20 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Check, Copy } from "lucide-react";
-import { useId, useRef } from "react";
-import { Textarea } from "./ui/textarea";
-import Image from "next/image";
 import { useEdgeStore } from "@/lib/edgestore";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Card09 } from "./kokonutui/card-09";
-import { Progress } from "./comp-254";
+import { cn } from "@/lib/utils";
+import { defineStepper } from "@stepperize/react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Check, Copy, Trash, Upload } from "lucide-react";
+import React, { useId, useRef, useState } from "react";
 import { type Accept, useDropzone } from "react-dropzone";
-import { ColorPicker } from "./color-Picker";
+import { Items } from "./checkout-items";
+import { Progress } from "./comp-254";
+import { Card09 } from "./kokonutui/card-09";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
 
 function extractSpecificDomainUrls(text: string): string | undefined {
   // Regular expression to match URLs starting with the specific domain

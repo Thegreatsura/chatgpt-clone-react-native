@@ -1,17 +1,7 @@
 "use client";
 
-import { useSliderWithInput } from "@/hooks/use-slider-with-input";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Slider } from "@/components/ui/slider";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { RotateCcw } from "lucide-react";
+import { useSliderWithInput } from "@/hooks/use-slider-with-input";
 
 export function Progress({ value }: { value: number }) {
   const minValue = 0;
