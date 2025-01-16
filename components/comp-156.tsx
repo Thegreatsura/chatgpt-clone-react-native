@@ -13,7 +13,7 @@ import { Button } from "./ui/button";
 import { CircleHelp } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export function AddEmail() {
+export function AddEmail({ className }: { className?: string }) {
   const radioId = useId();
   const inputId = useId();
   const [selectedValue, setSelectedValue] = useState("without-expansion");
@@ -27,7 +27,7 @@ export function AddEmail() {
 
   return (
     <RadioGroup
-      className="gap-6 mt-2 border p-2 rounded-none"
+      className={cn("gap-6 mt-2 border p-2 rounded-none", className)}
       value={selectedValue}
       onValueChange={setSelectedValue}
     >

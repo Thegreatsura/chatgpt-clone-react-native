@@ -22,10 +22,15 @@ interface Card09Props {
 
 const defaultOrderDetails = [
   {
-    itemName: "Premium Plan",
+    itemName: "Pro Plan",
     quantity: 1,
     unitPrice: 99.99,
   },
+  // {
+  //   itemName: "Access Pro Plan",
+  //   quantity: 1,
+  //   unitPrice: 99.99,
+  // },
 ];
 
 export function Card09({
@@ -34,13 +39,12 @@ export function Card09({
     (acc, item) => acc + item.unitPrice * item.quantity,
     0
   ),
-  tax = subtotal * 0.08, // 8% default tax
   shipping = 0,
   discount = {
     code: "WELCOME10",
-    amount: subtotal * 0.1, // 10% discount
+    amount: 0,
   },
-  total = subtotal + tax + shipping - discount.amount,
+  total = subtotal + shipping - discount.amount,
   currency = "USD",
   onCheckout,
 }: Card09Props) {
@@ -56,10 +60,10 @@ export function Card09({
   return (
     <div
       className={cn(
-        "w-full max-w-[400px]",
+        "w-full max-w-[400px] h-full",
         "rounded-none",
         "bg-white dark:bg-zinc-900",
-        "border border-zinc-200 dark:border-zinc-800",
+        "dark:border-zinc-800",
         "shadow-sm"
       )}
     >
@@ -111,21 +115,17 @@ export function Card09({
             </div>
           )}
 
-          {tax > 0 && (
-            <div className="flex justify-between text-sm">
-              <span className="text-zinc-600 dark:text-zinc-400">Tax</span>
-              <span className="font-medium text-zinc-900 dark:text-zinc-100">
-                {formatPrice(tax)}
-              </span>
-            </div>
-          )}
+          <div className="flex justify-between text-sm">
+            <span className="text-zinc-600 dark:text-zinc-400">Tax</span>
+            <span className="font-medium text-zinc-900 dark:text-zinc-100">
+              {formatPrice(0)}
+            </span>
+          </div>
 
-          {discount && (
-            <div className="flex justify-between text-sm text-green-600 dark:text-green-400">
-              <span>Discount ({discount.code})</span>
-              <span>-{formatPrice(discount.amount)}</span>
-            </div>
-          )}
+          <div className="flex justify-between text-sm text-green-600 dark:text-green-400">
+            <span>Discount</span>
+            <span>-{formatPrice(0)}</span>
+          </div>
         </div>
 
         {/* Total */}

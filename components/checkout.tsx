@@ -9,7 +9,23 @@ import { ArrowLeft, Sparkles, Trash, Upload } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckOutItems, Items } from "./checkout-items";
 import { Input } from "./ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Check, Copy } from "lucide-react";
+import { useId, useRef } from "react";
+import { Textarea } from "./ui/textarea";
+import Image from "next/image";
+import { useEdgeStore } from "@/lib/edgestore";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Card09 } from "./kokonutui/card-09";
+import { Progress } from "./comp-254";
 import { type Accept, useDropzone } from "react-dropzone";
+import { ColorPicker } from "./color-Picker";
 
 function extractSpecificDomainUrls(text: string): string | undefined {
   // Regular expression to match URLs starting with the specific domain
@@ -28,9 +44,9 @@ function extractSpecificDomainUrls(text: string): string | undefined {
 
 const { Scoped, useStepper, steps } = defineStepper(
   { id: "a", title: "Step 1", description: "checkout details" },
-  { id: "b", title: "Step 2", description: "chose payment method" },
-  { id: "c", title: "Step 3", description: "show payment info" },
-  { id: "d", title: "Step 3", description: "enter payment info" },
+  { id: "b", title: "Step 2", description: "chose how you'll pay" },
+  { id: "c", title: "Step 3", description: "payment details" },
+  { id: "d", title: "Step 3", description: "Transaction info" },
   { id: "e", title: "Step 3", description: "final" }
 );
 
@@ -49,9 +65,10 @@ const dummyItems: CheckoutItem[] = [
 const Checkout = () => {
   const [message, setMessage] = useState("");
   const [isDragging, setIsDragging] = useState(false);
+  const [uploading, setIsUploading] = useState(false);
   const [Url, setUrl] = useState<string | null>(null);
   const [progress, setProgress] = useState<number | null>(null);
-  const [select, onSelect] = useState<string>("hi");
+  const [selected, onSelect] = useState<string>("Telebirr");
   const { edgestore } = useEdgeStore();
   const stepper = useStepper();
 
@@ -65,6 +82,7 @@ const Checkout = () => {
 
   const onDrop = React.useCallback(async (acceptedFiles: File[]) => {
     if (acceptedFiles.length > 0) {
+      setIsUploading(true);
       console.log(acceptedFiles);
       const file = acceptedFiles[0];
       const res = await edgestore.publicFiles.upload({
@@ -82,6 +100,7 @@ const Checkout = () => {
       // to add the necessary data to your database
       console.log(res);
       setUrl(res.url);
+      setIsUploading(false);
     }
   }, []);
 
@@ -100,22 +119,23 @@ const Checkout = () => {
       <AnimatePresence>
         {!stepper.isLast && (
           <motion.div
-            className={cn("h-[40%] bg-gray-100", {
-              "h-[50%]": stepper.isFirst,
+            className={cn("h-[35%] bg-gray-100", {
+              "h-[80%]": stepper.isFirst,
             })}
           >
             <div className="h-full flex flex-col items-center justify-center">
               Total
-              <div>$120.76</div>
+              <div>$144.99</div>
+              {/* <ColorPicker color="0 0% 100%" onChange={console.log} /> */}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
       <div
-        className={cn("h-[60%] flex flex-col items-center bg-white", {
+        className={cn("h-[65%] flex flex-col items-center bg-white", {
           "h-[100vh]": stepper.isLast,
-          "h-[50%]": stepper.isFirst,
+          "h-[60%]": stepper.isFirst,
         })}
       >
         <>
@@ -177,13 +197,18 @@ const Checkout = () => {
             ),
             b: (step) => (
               <div className="w-full h-full px-6 flex flex-col mt-4">
-                <Items selected={select} onSelect={onSelect} className="mb-2" />
+                {/* <p className="text-2xl">{step.description}</p> */}
+                <Items
+                  selected={selected}
+                  onSelect={onSelect}
+                  className="mb-2"
+                />
                 <Button
-                  disabled={select.trim() === "hi"}
+                  disabled={selected.trim() === ""}
                   className="w-full rounded-none"
                   onClick={() => {
                     stepper.next();
-                    onSelect("hi");
+                    // onSelect("");
                   }}
                 >
                   continue
@@ -192,10 +217,12 @@ const Checkout = () => {
             ),
             c: (step) => (
               <div className="w-full h-full p-6">
-                <p>{step.description}</p>
-                <I />
-                <I />
-                <I />
+                <p className="py-3 pb-3 text-2xl">
+                  {selected} {step.description}
+                </p>
+                <I label="Account Holder Name" value="test name" />
+                <I label="Account Number" value="test account" />
+                <I label="Amount" value="test amount" />
                 <Button
                   className="w-full mt-4 rounded-none"
                   onClick={() => stepper.next()}
@@ -205,20 +232,22 @@ const Checkout = () => {
               </div>
             ),
             d: (step) => (
-              <div className="w-full h-full p-6">
-                <p>{step.description}</p>
-                <AddEmail />
-
+              <div className="w-full h-full px-6 py-4 ">
+                <p className="py-3 pb-3 text-2xl">{step.description}</p>
+                {/* <AddEmail className="mb-2" /> */}
+                <Label className="">Transaction Message</Label>
                 <Textarea
                   onChange={(e) => setMessage(e.target.value)}
-                  rows={7}
-                  className="mt-4"
+                  rows={5}
+                  className="mt-1 mb-2"
                 />
+
+                <Label className="">Screenshot of Transaction (Optional)</Label>
 
                 <div
                   {...getRootProps()}
                   className={cn(
-                    "relative group h-[100px] cursor-pointer mt-6 mb-1 flex flex-col items-center justify-center",
+                    "relative group h-[100px] cursor-pointer mt-1 mb-1 flex flex-col items-center justify-center",
                     "rounded-none border-2 border-dashed",
                     "transition-colors duration-200",
                     isDragging
@@ -277,6 +306,7 @@ const Checkout = () => {
                 </div>
 
                 <Button
+                  disabled={uploading || message === ""}
                   className="w-full mt-4 rounded-none"
                   onClick={() => {
                     console.log(extractSpecificDomainUrls(message));
@@ -288,17 +318,18 @@ const Checkout = () => {
               </div>
             ),
             e: () => (
-              <div className="w-full h-full p-6 flex flex-col items-center justify-center">
-                <div className="w-full flex items-center justify-center">
-                  <p>Finished!</p>
-                </div>
-                <Button
-                  className="w-full mt-4 rounded-none"
-                  onClick={() => stepper.reset()}
-                >
-                  reset
-                </Button>
-              </div>
+              // <div className="w-full h-full p-6 flex flex-col items-center justify-center">
+              //   <div className="w-full flex items-center justify-center">
+              //     <p>Finished!</p>
+              //   </div>
+              //   <Button
+              //     className="w-full mt-4 rounded-none"
+              //     onClick={() => stepper.reset()}
+              //   >
+              //     reset
+              //   </Button>
+              // </div>
+              <Final onBack={() => stepper.reset()} />
             ),
           })}
         </>
@@ -309,23 +340,7 @@ const Checkout = () => {
 
 export default Checkout;
 
-import { Label } from "@/components/ui/label";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { Check, Copy } from "lucide-react";
-import { useId, useRef } from "react";
-import { Textarea } from "./ui/textarea";
-import Image from "next/image";
-import { useEdgeStore } from "@/lib/edgestore";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Card09 } from "./kokonutui/card-09";
-import { Progress } from "./comp-254";
-
-export function I() {
+export function I({ label, value }: { value: string; label: string }) {
   const id = useId();
   const [copied, setCopied] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -341,12 +356,13 @@ export function I() {
   return (
     <div className="mb-4">
       <div className="relative">
+        <Label>{label}</Label>
         <Input
           ref={inputRef}
           id={id}
           className="rounded-none"
           type="text"
-          defaultValue="pnpm install origin-ui"
+          defaultValue={value}
           readOnly
         />
         <TooltipProvider delayDuration={0}>
@@ -354,7 +370,7 @@ export function I() {
             <TooltipTrigger asChild>
               <button
                 onClick={handleCopy}
-                className="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-lg border border-transparent text-muted-foreground/80 outline-offset-2 transition-colors hover:text-foreground focus-visible:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring/70 disabled:pointer-events-none disabled:cursor-not-allowed"
+                className="absolute inset-y-0 end-0 top-3 flex h-full w-9 items-center justify-center rounded-e-lg border border-transparent text-muted-foreground/80 outline-offset-2 transition-colors hover:text-foreground focus-visible:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring/70 disabled:pointer-events-none disabled:cursor-not-allowed"
                 aria-label={copied ? "Copied" : "Copy to clipboard"}
                 disabled={copied}
               >
@@ -390,3 +406,56 @@ export function I() {
     </div>
   );
 }
+
+const Final = ({ onBack }: { onBack: () => void }) => {
+  return (
+    <div className="relative w-full h-full shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15),0_30px_60px_-30px_rgba(0,0,0,0.15)] p-6 overflow-hidden">
+      {/* Content container */}
+      <div className="h-full flex flex-col items-center justify-center">
+        {/* Success icon */}
+        <div className="mb-4">
+          <div className="w-16 h-16 rounded-full border-2 border-blue-500 flex items-center justify-center">
+            <svg
+              className="w-8 h-8 text-blue-500"
+              fill="none"
+              strokeWidth="2"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          </div>
+        </div>
+
+        {/* Success message */}
+        <h2 className="text-gray-600 dark:text-white text-xl mb-4">
+          Payment successful
+        </h2>
+
+        {/* Amount */}
+        <div className="text-[42px] font-semibold text-gray-900 dark:text-white mb-4">
+          $144.99
+        </div>
+
+        {/* Payment details */}
+        <p className="text-gray-500 dark:text-white text-center mb-8">
+          when payemnt is verified you'll get
+          <br />
+          statement as Access inc.
+        </p>
+
+        {/* Back button */}
+        <button
+          onClick={onBack}
+          className="text-blue-500 font-medium hover:text-blue-600 transition-colors"
+        >
+          Back to home
+        </button>
+      </div>
+    </div>
+  );
+};

@@ -33,7 +33,7 @@ export function Progress({ value }: { value: number }) {
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-1">
           <Input
-            className="h-7 w-7 px-2 py-0"
+            className="h-7 w-12 px-2 py-0 border-none"
             type="text"
             inputMode="decimal"
             value={value}
